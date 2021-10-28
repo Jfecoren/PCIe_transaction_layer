@@ -8,5 +8,5 @@ PCI Express Transaction Layer. College Project
 Luis Mora Delgado
 Luis Diego Ocampo Gomez
 Juan Felipe Cortes Renteria
-Jordi L...
+Jordi Louzao von Breymann
 ```
