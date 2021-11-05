@@ -3,13 +3,13 @@
  */
 module true_dpram_sclk
 (
-	input [7:0] data_a, data_b,
-	input [5:0] addr_a, addr_b,
+	input [11:0] data_a, data_b,
+	input [2:0] addr_a, addr_b,
 	input we_a, we_b, clk,
-	output reg [7:0] q_a, q_b
+	output reg [11:0] q_a, q_b
 );
 	// Declare the RAM variable
-	reg [7:0] ram[63:0];
+	reg [11:0] ram[7:0];
 	
 	// Port A
 	always @ (posedge clk)
