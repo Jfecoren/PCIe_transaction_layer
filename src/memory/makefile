@@ -4,17 +4,19 @@ TARGET1 = true_dpram_sclk_est.v
 OUTPUT0 = memoria.out
 OUTPUT1 = memoria.vcd
 TESTBENCH0 = BancoPruebas.v
+YPATH = ../STL
+VFLAGS = -I ../../include
 
 all:
-	yosys -s ../STL/memoria.tcl
+	yosys -s $(YPATH)/memory.tcl
 	sed -i 's/true_dpram_sclk/true_dpram_sclk_est/' $(TARGET1)
 	sed -i 's/q_a/q_a_est/g' $(TARGET1)
 	sed -i 's/q_b/q_b_est/g' $(TARGET1)
 	emacs --batch $(TESTBENCH0) -f verilog-batch-auto
 	@echo "Compilando Verilog"
-	$(CC) -o $(OUTPUT0) $(TESTBENCH0) 
+	$(CC) -o $(OUTPUT0) $(TESTBENCH0) $(VFLAGS)
 	vvp $(OUTPUT0)
-	@echo "Fin. Utilice <make wave> para generar onda del archivo, o <make clean> par borrar los archivos temporales."
+	@echo "\nFin. Utilice <make wave> para generar onda del archivo, o <make clean> par borrar los archivos temporales."
 wave:
 	gtkwave $(OUTPUT1)
 

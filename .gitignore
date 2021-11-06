@@ -3,3 +3,4 @@
 # ignore output verilog files
 *.o
 *.vcd
+*.out
