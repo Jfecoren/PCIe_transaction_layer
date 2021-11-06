@@ -1,4 +1,4 @@
-`timescale 	1ns				/ 100ps
+`timescale 	1ns	/ 100ps
 // escala	unidad temporal (valor de "#1") / precision
 // includes de archivos de verilog
 `include "cmos_cells.v"
