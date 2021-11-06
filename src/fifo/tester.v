@@ -1,0 +1,7 @@
+
+
+module tester(
+    ports
+);
+    
+endmodule
