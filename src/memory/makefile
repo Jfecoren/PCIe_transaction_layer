@@ -4,7 +4,7 @@ TARGET1 = true_dpram_sclk_est.v
 OUTPUT0 = memoria.out
 OUTPUT1 = memoria.vcd
 TESTBENCH0 = BancoPruebas.v
-YPATH = ../STL
+YPATH = ../TCL
 VFLAGS = -I ../../include
 
 all:
