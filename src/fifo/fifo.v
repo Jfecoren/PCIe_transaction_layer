@@ -54,7 +54,7 @@ module fifo #( // the ALMOST bounds are parameters and can be changed ass requir
             /*  pop logic: receive pop signal from respective Referee
              *  how address is updated, its ask for the data in that address and updates the read pointer
             */
-            if(pop & memory_state != 0) begin
+            else if(pop & memory_state != 0) begin
                 data_out <= data_r;
                 rd_ptr <= rd_ptr + 1;
                 memory_state <= memory_state - 1; // Possible-bug: Short-circuit with itself push logic
