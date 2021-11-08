@@ -1,6 +1,5 @@
 
 `include "true_dpram_sclk.v"
-`include "cmos_cells.v"
 
 module fifo #( // the ALMOST bounds are parameters and can be changed ass required
     parameter ALMOST_FULL = 6,

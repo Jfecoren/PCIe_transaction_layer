@@ -3,6 +3,7 @@
 `include "fifo.v"
 `include "fifo_est.v"
 `include "tester.v"
+`include "cmos_cells.v"
 
 
 
