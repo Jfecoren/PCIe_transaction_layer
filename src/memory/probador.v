@@ -1,14 +1,14 @@
 module probador(
-    input [11:0]      q_a,
-    input [11:0]      q_b,
-    input [11:0]      q_a_est,
-    input [11:0]      q_b_est,
-    output reg 	     we_a,
-    output reg 	     we_b,
-    output reg [2:0] addr_a,
-    output reg [2:0] addr_b,
-    output reg [11:0] data_a,
-    output reg [11:0] data_b,
+    input [11:0]      q_w,
+    input [11:0]      q_r,
+    input [11:0]      q_w_est,
+    input [11:0]      q_r_est,
+    output reg 	     wr_e,
+    output reg 	     rd_e,
+    output reg [2:0] wr_ptr,
+    output reg [2:0] rd_ptr,
+    output reg [11:0] data_w,
+    output reg [11:0] data_r,
     output reg 	     clk
 );
 
@@ -17,37 +17,37 @@ module probador(
       $dumpvars;		// Directiva para "dumpear" variables
 
       // Valores iniciales cero
-      {we_a, we_b, addr_a, addr_b, data_a, data_b} = 0;
+      {wr_e, rd_e, wr_ptr, rd_ptr, data_w, data_r} = 0;
 
       @(posedge clk);
-      we_a <= 1;
-      we_b <= 1;
+      wr_e <= 1;
+      rd_e <= 1;
       
       @(posedge clk);
-      addr_a <= 'b000;
-      addr_b <= 'b001;
-      data_a <= 'h00A;
-      data_b <= 'h00B;
+      wr_ptr <= 'b000;
+      rd_ptr <= 'b001;
+      data_w <= 'h00A;
+      data_r <= 'h00B;
       
       @(posedge clk);
-      addr_a <= 'b010;
-      addr_b <= 'b011;
-      data_a <= 'h0AA;
-      data_b <= 'h0BB;
+      wr_ptr <= 'b010;
+      rd_ptr <= 'b011;
+      data_w <= 'h0AA;
+      data_r <= 'h0BB;
 
       @(posedge clk);
-      we_a <= 0;
-      we_b <= 0;
+      wr_e <= 0;
+      rd_e <= 0;
 
       @(posedge clk);
-      addr_a <= 'b000;
-      addr_b <= 'b001;
+      wr_ptr <= 'b000;
+      rd_ptr <= 'b001;
       
       @(posedge clk);
       
       @(posedge clk);
-      addr_a <= 'b010;
-      addr_b <= 'b011;
+      wr_ptr <= 'b010;
+      rd_ptr <= 'b011;
 
       // Termina de almacenar senales
       $finish;			

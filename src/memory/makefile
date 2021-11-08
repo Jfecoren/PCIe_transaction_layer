@@ -10,8 +10,8 @@ VFLAGS = -I ../../include
 all:
 	yosys -s $(YPATH)/memory.tcl
 	sed -i 's/true_dpram_sclk/true_dpram_sclk_est/' $(TARGET1)
-	sed -i 's/q_a/q_a_est/g' $(TARGET1)
-	sed -i 's/q_b/q_b_est/g' $(TARGET1)
+	sed -i 's/q_w/q_w_est/g' $(TARGET1)
+	sed -i 's/q_r/q_r_est/g' $(TARGET1)
 	emacs --batch $(TESTBENCH0) -f verilog-batch-auto
 	@echo "Compilando Verilog"
 	$(CC) -o $(OUTPUT0) $(TESTBENCH0) $(VFLAGS)
