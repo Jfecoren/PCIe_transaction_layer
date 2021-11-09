@@ -1,4 +1,4 @@
-read_verilog fifo.v
+read_verilog -I ../memory fifo.v
 hierarchy -check -top fifo
 proc; opt; fsm; opt; memory; opt
 techmap; opt

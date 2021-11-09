@@ -3,10 +3,11 @@
 CC := iverilog
 TARGET1 = fifo_est.v
 OUTPUT0 = fifo.out
+OUTPUT1 = fifo.vcd
 TESTBENCH0 = testbench.v
 
 YPATH := ../TCL
-VFLAGS := -I ../../include
+VFLAGS := -I ../../include -I ../memory
 CLN_FLS := *.o *.out *.vcd
 
 all:
@@ -20,7 +21,8 @@ all:
 	@echo "Compilando Verilog"
 	$(CC) -o $(OUTPUT0) $(TESTBENCH0) $(VFLAGS)
 	vvp $(OUTPUT0)
-
+wave:
+	gtkwave $(OUTPUT1)
 clean:
 	rm -rf $(CLN_FLS)
 

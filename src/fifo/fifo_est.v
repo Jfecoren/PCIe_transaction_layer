@@ -1383,11 +1383,11 @@ module fifo_est(data_out_est, almost_full_est, almost_empty_est, data_in, reset,
   assign wr_ptr = 3'h0;
 endmodule
 
-(* src = "true_dpram_sclk_est.v:4" *)
+(* src = "../memory/true_dpram_sclk_est.v:4" *)
 module true_dpram_sclk_est(data_a, data_b, addr_a, addr_b, we_a, we_b, clk, q_a, q_b);
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   wire [11:0] _0000_;
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   wire [11:0] _0001_;
   wire _0002_;
   wire _0003_;
@@ -2589,19 +2589,19 @@ module true_dpram_sclk_est(data_a, data_b, addr_a, addr_b, we_a, we_b, clk, q_a,
   wire _1199_;
   wire _1200_;
   wire _1201_;
-  (* src = "true_dpram_sclk_est.v:7" *)
+  (* src = "../memory/true_dpram_sclk_est.v:7" *)
   input [2:0] addr_a;
-  (* src = "true_dpram_sclk_est.v:7" *)
+  (* src = "../memory/true_dpram_sclk_est.v:7" *)
   input [2:0] addr_b;
-  (* src = "true_dpram_sclk_est.v:8" *)
+  (* src = "../memory/true_dpram_sclk_est.v:8" *)
   input clk;
-  (* src = "true_dpram_sclk_est.v:6" *)
+  (* src = "../memory/true_dpram_sclk_est.v:6" *)
   input [11:0] data_a;
-  (* src = "true_dpram_sclk_est.v:6" *)
+  (* src = "../memory/true_dpram_sclk_est.v:6" *)
   input [11:0] data_b;
-  (* src = "true_dpram_sclk_est.v:9" *)
+  (* src = "../memory/true_dpram_sclk_est.v:9" *)
   output [11:0] q_a;
-  (* src = "true_dpram_sclk_est.v:9" *)
+  (* src = "../memory/true_dpram_sclk_est.v:9" *)
   output [11:0] q_b;
   wire [11:0] \ram[0] ;
   wire [11:0] \ram[1] ;
@@ -2611,9 +2611,9 @@ module true_dpram_sclk_est(data_a, data_b, addr_a, addr_b, we_a, we_b, clk, q_a,
   wire [11:0] \ram[5] ;
   wire [11:0] \ram[6] ;
   wire [11:0] \ram[7] ;
-  (* src = "true_dpram_sclk_est.v:8" *)
+  (* src = "../memory/true_dpram_sclk_est.v:8" *)
   input we_a;
-  (* src = "true_dpram_sclk_est.v:8" *)
+  (* src = "../memory/true_dpram_sclk_est.v:8" *)
   input we_b;
   NOT _1202_ (
     .A(addr_b[0]),
@@ -9015,73 +9015,73 @@ module true_dpram_sclk_est(data_a, data_b, addr_a, addr_b, we_a, we_b, clk, q_a,
     .D(_0064_),
     .Q(\ram[5] [11])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2486_ (
     .C(clk),
     .D(_0001_[0]),
     .Q(q_b[0])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2487_ (
     .C(clk),
     .D(_0001_[1]),
     .Q(q_b[1])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2488_ (
     .C(clk),
     .D(_0001_[2]),
     .Q(q_b[2])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2489_ (
     .C(clk),
     .D(_0001_[3]),
     .Q(q_b[3])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2490_ (
     .C(clk),
     .D(_0001_[4]),
     .Q(q_b[4])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2491_ (
     .C(clk),
     .D(_0001_[5]),
     .Q(q_b[5])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2492_ (
     .C(clk),
     .D(_0001_[6]),
     .Q(q_b[6])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2493_ (
     .C(clk),
     .D(_0001_[7]),
     .Q(q_b[7])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2494_ (
     .C(clk),
     .D(_0001_[8]),
     .Q(q_b[8])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2495_ (
     .C(clk),
     .D(_0001_[9]),
     .Q(q_b[9])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2496_ (
     .C(clk),
     .D(_0001_[10]),
     .Q(q_b[10])
   );
-  (* src = "true_dpram_sclk_est.v:29" *)
+  (* src = "../memory/true_dpram_sclk_est.v:29" *)
   DFF _2497_ (
     .C(clk),
     .D(_0001_[11]),
@@ -9207,73 +9207,73 @@ module true_dpram_sclk_est(data_a, data_b, addr_a, addr_b, we_a, we_b, clk, q_a,
     .D(_0028_),
     .Q(\ram[2] [11])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2522_ (
     .C(clk),
     .D(_0000_[0]),
     .Q(q_a[0])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2523_ (
     .C(clk),
     .D(_0000_[1]),
     .Q(q_a[1])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2524_ (
     .C(clk),
     .D(_0000_[2]),
     .Q(q_a[2])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2525_ (
     .C(clk),
     .D(_0000_[3]),
     .Q(q_a[3])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2526_ (
     .C(clk),
     .D(_0000_[4]),
     .Q(q_a[4])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2527_ (
     .C(clk),
     .D(_0000_[5]),
     .Q(q_a[5])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2528_ (
     .C(clk),
     .D(_0000_[6]),
     .Q(q_a[6])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2529_ (
     .C(clk),
     .D(_0000_[7]),
     .Q(q_a[7])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2530_ (
     .C(clk),
     .D(_0000_[8]),
     .Q(q_a[8])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2531_ (
     .C(clk),
     .D(_0000_[9]),
     .Q(q_a[9])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2532_ (
     .C(clk),
     .D(_0000_[10]),
     .Q(q_a[10])
   );
-  (* src = "true_dpram_sclk_est.v:15" *)
+  (* src = "../memory/true_dpram_sclk_est.v:15" *)
   DFF _2533_ (
     .C(clk),
     .D(_0000_[11]),
