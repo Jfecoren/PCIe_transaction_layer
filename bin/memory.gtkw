@@ -1,44 +1,43 @@
 [*]
-[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Tue Nov  9 02:15:56 2021
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Tue Nov  9 04:34:00 2021
 [*]
-[dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/memory/memoria.vcd"
-[dumpfile_mtime] "Tue Nov  9 02:07:48 2021"
+[dumpfile] "/home/jordi/Desktop/Digitales2/Proyecto2/PCIe_transaction_layer/src/memory/memoria.vcd"
+[dumpfile_mtime] "Tue Nov  9 04:31:59 2021"
 [dumpfile_size] 191207
-[savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/bin/memory.gtkw"
+[savefile] "/home/jordi/Desktop/Digitales2/Proyecto2/PCIe_transaction_layer/bin/memory.gtkw"
 [timestart] 0
-[size] 1842 916
-[pos] -422 -159
-*-13.884627 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[sst_width] 218
-[signals_width] 134
+[size] 1920 935
+[pos] -1 -335
+*-13.819195 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 196
+[signals_width] 166
 [sst_expanded] 1
-[sst_vpaned_height] 260
-@200
--Clock
+[sst_vpaned_height] 273
 @28
 BancoPruebas.clk
 @200
--Bus A
-@22
-BancoPruebas.data_a[11:0]
+-Write Enables
+@28
+BancoPruebas.we_a
+@29
+BancoPruebas.we_b
+@200
+-Addresses
 @28
 BancoPruebas.addr_a[2:0]
+BancoPruebas.addr_b[2:0]
+@200
+-Entradas de Datos
+@22
+BancoPruebas.data_a[11:0]
+BancoPruebas.data_b[11:0]
+@200
+-Salidas de Datos
 @22
 BancoPruebas.q_a[11:0]
 BancoPruebas.q_a_est[11:0]
-@28
-BancoPruebas.we_a
-@200
--Bus B
-@22
-BancoPruebas.data_b[11:0]
-@28
-BancoPruebas.addr_b[2:0]
-@22
 BancoPruebas.q_b[11:0]
 BancoPruebas.q_b_est[11:0]
-@28
-BancoPruebas.we_b
 [pattern_trace] 1
 [pattern_trace] 0
