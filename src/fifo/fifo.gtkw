@@ -1,0 +1,53 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Thu Nov 11 03:46:58 2021
+[*]
+[dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/fifo/fifo.vcd"
+[dumpfile_mtime] "Thu Nov 11 03:41:36 2021"
+[dumpfile_size] 235452
+[savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/fifo/fifo.gtkw"
+[timestart] 0
+[size] 1842 916
+[pos] -422 -159
+*-15.716559 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[treeopen] testbench.fifo_cnd.
+[sst_width] 218
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 260
+@200
+-Inputs
+@28
+testbench.reset
+testbench.clk
+@22
+testbench.data_in[11:0]
+@200
+-Write
+@28
+testbench.push
+testbench.fifo_cnd.wr_ptr[2:0]
+@22
+testbench.fifo_cnd.fiforam.q_w[11:0]
+@200
+-Read
+@28
+testbench.pop
+testbench.fifo_cnd.rd_ptr[2:0]
+@22
+testbench.fifo_cnd.fiforam.q_r[11:0]
+@200
+-Bounds
+@28
+testbench.almost_empty
+testbench.almost_empty_str
+testbench.almost_full
+testbench.almost_full_str
+@200
+-Outputs
+@22
+testbench.data_out[11:0]
+testbench.data_out_str[11:0]
+[pattern_trace] 1
+[pattern_trace] 0
