@@ -1,0 +1,38 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Thu Nov 11 02:49:32 2021
+[*]
+[dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/memory/memory.vcd"
+[dumpfile_mtime] "Thu Nov 11 02:46:28 2021"
+[dumpfile_size] 190786
+[savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/memory/memory.gtkw"
+[timestart] 0
+[size] 1842 916
+[pos] -422 -159
+*-13.884627 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 218
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 260
+@28
+testbench.clk
+@200
+-Read
+@28
+testbench.rd_e
+testbench.rd_ptr[2:0]
+@22
+testbench.q_r[11:0]
+testbench.q_r_str[11:0]
+testbench.data_r[11:0]
+@200
+-Write
+@28
+testbench.wr_e
+testbench.wr_ptr[2:0]
+@22
+testbench.q_w[11:0]
+testbench.q_w_str[11:0]
+testbench.data_w[11:0]
+[pattern_trace] 1
+[pattern_trace] 0

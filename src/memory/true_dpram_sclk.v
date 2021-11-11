@@ -1,6 +1,6 @@
 /* Verilog True Dual Port RAM with a Single Clock Design Example v1.0
  Copyright (c) 2010 Altera Corporation. All rights reserved.
- Modified for Academic Purposes Only
+ Modified for Academic Purposes Only.
  */
 module true_dpram_sclk #(
 	parameter LINE_SIZE = 12,
@@ -19,7 +19,7 @@ module true_dpram_sclk #(
 	// Port A
 	always @ (posedge clk)
 		begin
-			if (wr_e) 
+			if (wr_e)
 				begin
 					ram[wr_ptr] <= data_w;
 					q_w <= data_w;

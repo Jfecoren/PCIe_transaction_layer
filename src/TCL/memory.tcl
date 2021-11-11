@@ -6,4 +6,4 @@ dfflibmap -liberty ../../include/cmos_cells.lib
 abc -liberty ../../include/cmos_cells.lib
 clean
 show  -lib ../../include/cmos_cells.v true_dpram_sclk
-write_verilog true_dpram_sclk_est.v
+write_verilog true_dpram_sclk_str.v

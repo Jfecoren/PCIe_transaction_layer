@@ -1,26 +1,31 @@
-CC = iverilog
-TARGET0 = true_dpram_sclk.v
-TARGET1 = true_dpram_sclk_est.v
-OUTPUT0 = memoria.out
-OUTPUT1 = memoria.vcd
-TESTBENCH0 = BancoPruebas.v
-YPATH = ../TCL
-VFLAGS = -I ../../include
+CC := iverilog
+YPATH := ../TCL
+VFLAGS := -I ../../include
 
-all:
+TARGET := true_dpram_sclk
+OUTPUT := memory
+TESTBENCH = testbench
+
+all: yosys emacs
+	@echo "\nCompiling..."
+	$(CC) -o $(OUTPUT).out $(TESTBENCH).v $(VFLAGS)
+	vvp $(OUTPUT).out
+	@echo "\nFinished. \nUse <make wave> to open signal visualizer, or <make gtk> to open default signals view."
+
+yosys:
 	yosys -s $(YPATH)/memory.tcl
-	sed -i 's/true_dpram_sclk/true_dpram_sclk_est/' $(TARGET1)
-	sed -i 's/q_w/q_w_est/g' $(TARGET1)
-	sed -i 's/q_r/q_r_est/g' $(TARGET1)
-	emacs --batch $(TESTBENCH0) -f verilog-batch-auto
-	@echo "Compilando Verilog"
-	$(CC) -o $(OUTPUT0) $(TESTBENCH0) $(VFLAGS)
-	vvp $(OUTPUT0)
-	@echo "\nFin. Utilice <make wave> para generar onda del archivo, o <make clean> par borrar los archivos temporales."
+	sed -i 's/true_dpram_sclk/true_dpram_sclk_str/' $(TARGET)_str.v
+	sed -i 's/q_w/q_w_str/g' $(TARGET)_str.v
+	sed -i 's/q_r/q_r_str/g' $(TARGET)_str.v
+emacs:
+	emacs --batch $(TESTBENCH).v -f verilog-batch-auto
+
 wave:
-	gtkwave $(OUTPUT1)
+	gtkwave $(OUTPUT).vcd
+gtk:
+	gtkwave $(OUTPUT).gtkw
 
 clean:
-	rm -f $(OUTPUT0)
-	rm -f $(OUTPUT1)
-	rm -f $(TARGET1)
+	rm -f $(OUTPUT).out
+	rm -f $(OUTPUT).vcd
+	rm -f $(TARGET)_str.v

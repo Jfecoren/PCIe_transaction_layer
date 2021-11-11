@@ -1,8 +1,8 @@
-module probador(
+module tester(
     input [11:0]      q_w,
     input [11:0]      q_r,
-    input [11:0]      q_w_est,
-    input [11:0]      q_r_est,
+    input [11:0]      q_w_str,
+    input [11:0]      q_r_str,
     output reg 	     wr_e,
     output reg 	     rd_e,
     output reg [2:0] wr_ptr,
@@ -13,7 +13,7 @@ module probador(
 );
 
    initial begin
-      $dumpfile("memoria.vcd");	// Nombre de archivo del "dump"
+      $dumpfile("memory.vcd");	// Nombre de archivo del "dump"
       $dumpvars;		// Directiva para "dumpear" variables
 
       // Valores iniciales cero
