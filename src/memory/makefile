@@ -6,11 +6,7 @@ TARGET := true_dpram_sclk
 OUTPUT := memory
 TESTBENCH = testbench
 
-all: yosys emacs
-	@echo "\nCompiling..."
-	$(CC) -o $(OUTPUT).out $(TESTBENCH).v $(VFLAGS)
-	vvp $(OUTPUT).out
-	@echo "\nFinished. \nUse <make wave> to open signal visualizer, or <make gtk> to open default signals view."
+all: yosys emacs icarus
 
 yosys:
 	yosys -s $(YPATH)/memory.tcl
@@ -19,6 +15,13 @@ yosys:
 	sed -i 's/q_r/q_r_str/g' $(TARGET)_str.v
 emacs:
 	emacs --batch $(TESTBENCH).v -f verilog-batch-auto
+icarus:
+	@echo "\nCompiling..."
+	$(CC) -o $(OUTPUT).out $(TESTBENCH).v $(VFLAGS)
+	vvp $(OUTPUT).out
+	@echo "\nFinished. \nUse <make wave> to open signal visualizer, or <make gtk> to open default signals view."
+
+
 
 wave:
 	gtkwave $(OUTPUT).vcd
