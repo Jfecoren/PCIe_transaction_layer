@@ -8,7 +8,8 @@ module referee_2 (
     input empty,
     input clk, reset
 );
-    reg [1:0] cont; 
+    reg [1:0] cont;
+    reg pop_toggle; 
 
     always @(posedge clk) begin
         if (~reset) begin
@@ -18,6 +19,7 @@ module referee_2 (
             push_3 <= 0;
             pop <= 0;
             cont <= 0;
+            pop_toggle <= 1;
         end
         else begin
             if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
@@ -32,7 +34,14 @@ module referee_2 (
                     pop <= 0;
                 end    
                 else begin
-                    pop <= 1;
+                    if (~pop_toggle) begin
+                        pop <= 0;
+                        pop_toggle <= pop_toggle + 1;                                                
+                    end
+                    else begin
+                        pop <= 1;
+                        pop_toggle <= pop_toggle + 1;
+                    end
                 end
             end            
             else if (cont == 0) begin
@@ -41,9 +50,17 @@ module referee_2 (
                 cont <= cont + 1;
                 if (empty) begin
                     pop <= 0;
+                    pop_toggle <= pop_toggle + 1;                    
                 end    
                 else begin
-                    pop <= 1;
+                    if (~pop_toggle) begin
+                        pop <= 0;
+                        pop_toggle <= pop_toggle + 1;                                                
+                    end
+                    else begin
+                        pop <= 1;
+                        pop_toggle <= pop_toggle + 1;
+                    end
                 end
             end
             else if (cont == 1) begin
@@ -52,9 +69,17 @@ module referee_2 (
                 cont <= cont + 1;                
                 if (empty) begin
                     pop <= 0;
+                    pop_toggle <= pop_toggle + 1;
                 end    
                 else begin
-                    pop <= 1;
+                    if (~pop_toggle) begin
+                        pop <= 0;
+                        pop_toggle <= pop_toggle + 1;                        
+                    end
+                    else begin
+                        pop <= 1;
+                        pop_toggle <= pop_toggle + 1;
+                    end
                 end
             end
             else if (cont == 2) begin
@@ -63,9 +88,17 @@ module referee_2 (
                 cont <= cont + 1;
                 if (empty) begin
                     pop <= 0;
+                    pop_toggle <= pop_toggle + 1;
                 end    
                 else begin
-                    pop <= 1;
+                    if (~pop_toggle) begin
+                        pop <= 0;
+                        pop_toggle <= pop_toggle + 1;                        
+                    end
+                    else begin
+                        pop <= 1;
+                        pop_toggle <= pop_toggle + 1;
+                    end
                 end
             end
             else if (cont == 3) begin
@@ -74,9 +107,17 @@ module referee_2 (
                 cont <= 0;
                 if (empty) begin
                     pop <= 0;
+                    pop_toggle <= pop_toggle + 1;                    
                 end    
                 else begin
-                    pop <= 1;
+                    if (~pop_toggle) begin
+                        pop <= 0;
+                        pop_toggle <= pop_toggle + 1;                        
+                    end
+                    else begin
+                        pop <= 1;
+                        pop_toggle <= pop_toggle + 1;
+                    end
                 end
             end  
         end

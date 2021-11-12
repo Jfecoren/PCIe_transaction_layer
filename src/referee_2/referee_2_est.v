@@ -3,51 +3,59 @@
 (* top =  1  *)
 (* src = "referee_2_est.v:2" *)
 module referee_2_est(push_0, push_1, push_2, push_3, pop, almost_full_0, almost_full_1, almost_full_2, almost_full_3, empty, clk, reset);
-  (* src = "referee_2_est.v:13" *)
-  wire [1:0] _00_;
-  (* src = "referee_2_est.v:13" *)
-  wire _01_;
-  (* src = "referee_2_est.v:13" *)
-  wire _02_;
-  (* src = "referee_2_est.v:13" *)
-  wire _03_;
-  (* src = "referee_2_est.v:13" *)
-  wire _04_;
-  (* src = "referee_2_est.v:13" *)
-  wire _05_;
-  wire _06_;
-  wire _07_;
-  wire _08_;
-  wire _09_;
-  wire _10_;
-  wire _11_;
-  wire _12_;
-  wire _13_;
-  wire _14_;
-  wire _15_;
-  wire _16_;
-  wire _17_;
-  wire _18_;
-  wire _19_;
-  wire _20_;
-  wire _21_;
-  wire _22_;
-  wire _23_;
-  wire _24_;
-  wire _25_;
-  wire _26_;
-  wire _27_;
-  wire _28_;
-  wire _29_;
-  wire _30_;
-  wire _31_;
-  wire _32_;
-  wire _33_;
-  wire _34_;
-  wire _35_;
-  wire _36_;
-  wire _37_;
-  wire _38_;
+  (* src = "referee_2_est.v:14" *)
+  wire [1:0] _000_;
+  (* src = "referee_2_est.v:14" *)
+  wire _001_;
+  (* src = "referee_2_est.v:14" *)
+  wire _002_;
+  (* src = "referee_2_est.v:14" *)
+  wire _003_;
+  (* src = "referee_2_est.v:14" *)
+  wire _004_;
+  (* src = "referee_2_est.v:14" *)
+  wire _005_;
+  (* src = "referee_2_est.v:14" *)
+  wire _006_;
+  wire _007_;
+  wire _008_;
+  wire _009_;
+  wire _010_;
+  wire _011_;
+  wire _012_;
+  wire _013_;
+  wire _014_;
+  wire _015_;
+  wire _016_;
+  wire _017_;
+  wire _018_;
+  wire _019_;
+  wire _020_;
+  wire _021_;
+  wire _022_;
+  wire _023_;
+  wire _024_;
+  wire _025_;
+  wire _026_;
+  wire _027_;
+  wire _028_;
+  wire _029_;
+  wire _030_;
+  wire _031_;
+  wire _032_;
+  wire _033_;
+  wire _034_;
+  wire _035_;
+  wire _036_;
+  wire _037_;
+  wire _038_;
+  wire _039_;
+  wire _040_;
+  wire _041_;
+  wire _042_;
+  wire _043_;
+  wire _044_;
+  wire _045_;
   (* src = "referee_2_est.v:7" *)
   input almost_full_0;
   (* src = "referee_2_est.v:7" *)
@@ -64,6 +72,8 @@ module referee_2_est(push_0, push_1, push_2, push_3, pop, almost_full_0, almost_
   input empty;
   (* src = "referee_2_est.v:4" *)
   output pop;
+  (* src = "referee_2_est.v:12" *)
+  wire pop_toggle;
   (* src = "referee_2_est.v:3" *)
   output push_0;
   (* src = "referee_2_est.v:3" *)
@@ -74,235 +84,275 @@ module referee_2_est(push_0, push_1, push_2, push_3, pop, almost_full_0, almost_
   output push_3;
   (* src = "referee_2_est.v:9" *)
   input reset;
-  NOT _39_ (
+  NOT _046_ (
     .A(cont[0]),
-    .Y(_06_)
+    .Y(_007_)
   );
-  NOT _40_ (
+  NOT _047_ (
     .A(cont[1]),
-    .Y(_07_)
+    .Y(_008_)
   );
-  NOT _41_ (
+  NOT _048_ (
+    .A(empty),
+    .Y(_009_)
+  );
+  NOT _049_ (
     .A(reset),
-    .Y(_08_)
+    .Y(_010_)
   );
-  NOT _42_ (
+  NOT _050_ (
     .A(push_3),
-    .Y(_09_)
+    .Y(_011_)
   );
-  NOT _43_ (
+  NOT _051_ (
     .A(push_2),
-    .Y(_10_)
+    .Y(_012_)
   );
-  NOT _44_ (
+  NOT _052_ (
     .A(push_1),
-    .Y(_11_)
+    .Y(_013_)
   );
-  NOR _45_ (
+  NOR _053_ (
     .A(almost_full_0),
     .B(almost_full_1),
-    .Y(_12_)
+    .Y(_014_)
   );
-  NOT _46_ (
-    .A(_12_),
-    .Y(_13_)
+  NOT _054_ (
+    .A(_014_),
+    .Y(_015_)
   );
-  NOR _47_ (
+  NOR _055_ (
     .A(almost_full_2),
     .B(almost_full_3),
-    .Y(_14_)
+    .Y(_016_)
   );
-  NOT _48_ (
-    .A(_14_),
-    .Y(_15_)
+  NOT _056_ (
+    .A(_016_),
+    .Y(_017_)
   );
-  NOR _49_ (
-    .A(_13_),
-    .B(_15_),
-    .Y(_16_)
+  NOR _057_ (
+    .A(_015_),
+    .B(_017_),
+    .Y(_018_)
   );
-  NAND _50_ (
+  NOR _058_ (
+    .A(_009_),
+    .B(_018_),
+    .Y(_019_)
+  );
+  NAND _059_ (
+    .A(pop_toggle),
+    .B(_019_),
+    .Y(_020_)
+  );
+  NOR _060_ (
+    .A(pop_toggle),
+    .B(_019_),
+    .Y(_021_)
+  );
+  NOR _061_ (
+    .A(_010_),
+    .B(_021_),
+    .Y(_022_)
+  );
+  NAND _062_ (
+    .A(_020_),
+    .B(_022_),
+    .Y(_002_)
+  );
+  NAND _063_ (
     .A(cont[0]),
-    .B(_16_),
-    .Y(_17_)
+    .B(_018_),
+    .Y(_023_)
   );
-  NOT _51_ (
-    .A(_17_),
-    .Y(_18_)
+  NOT _064_ (
+    .A(_023_),
+    .Y(_024_)
   );
-  NOR _52_ (
+  NOR _065_ (
     .A(cont[0]),
-    .B(_16_),
-    .Y(_19_)
+    .B(_018_),
+    .Y(_025_)
   );
-  NOT _53_ (
-    .A(_19_),
-    .Y(_20_)
+  NOT _066_ (
+    .A(_025_),
+    .Y(_026_)
   );
-  NAND _54_ (
+  NAND _067_ (
     .A(reset),
-    .B(_20_),
-    .Y(_21_)
+    .B(_026_),
+    .Y(_027_)
   );
-  NOR _55_ (
-    .A(_18_),
-    .B(_21_),
-    .Y(_00_[0])
+  NOR _068_ (
+    .A(_024_),
+    .B(_027_),
+    .Y(_000_[0])
   );
-  NOR _56_ (
-    .A(_07_),
-    .B(_17_),
-    .Y(_22_)
+  NOR _069_ (
+    .A(_008_),
+    .B(_023_),
+    .Y(_028_)
   );
-  NAND _57_ (
-    .A(_07_),
-    .B(_17_),
-    .Y(_23_)
+  NAND _070_ (
+    .A(_008_),
+    .B(_023_),
+    .Y(_029_)
   );
-  NAND _58_ (
+  NAND _071_ (
     .A(reset),
-    .B(_23_),
-    .Y(_24_)
+    .B(_029_),
+    .Y(_030_)
   );
-  NOR _59_ (
-    .A(_22_),
-    .B(_24_),
-    .Y(_00_[1])
+  NOR _072_ (
+    .A(_028_),
+    .B(_030_),
+    .Y(_000_[1])
   );
-  NAND _60_ (
+  NAND _073_ (
     .A(reset),
-    .B(_16_),
-    .Y(_25_)
+    .B(_018_),
+    .Y(_031_)
   );
-  NOR _61_ (
-    .A(_06_),
-    .B(_07_),
-    .Y(_26_)
+  NOR _074_ (
+    .A(_007_),
+    .B(_008_),
+    .Y(_032_)
   );
-  NOR _62_ (
+  NOR _075_ (
     .A(cont[0]),
     .B(cont[1]),
-    .Y(_27_)
+    .Y(_033_)
   );
-  NOR _63_ (
-    .A(_09_),
-    .B(_27_),
-    .Y(_28_)
+  NOR _076_ (
+    .A(_011_),
+    .B(_033_),
+    .Y(_034_)
   );
-  NOR _64_ (
-    .A(_26_),
-    .B(_28_),
-    .Y(_29_)
+  NOR _077_ (
+    .A(_032_),
+    .B(_034_),
+    .Y(_035_)
   );
-  NOR _65_ (
-    .A(_25_),
-    .B(_29_),
-    .Y(_05_)
+  NOR _078_ (
+    .A(_031_),
+    .B(_035_),
+    .Y(_006_)
   );
-  NOR _66_ (
+  NOR _079_ (
     .A(cont[0]),
-    .B(_07_),
-    .Y(_30_)
+    .B(_008_),
+    .Y(_036_)
   );
-  NOR _67_ (
+  NOR _080_ (
     .A(cont[1]),
-    .B(_10_),
-    .Y(_31_)
+    .B(_012_),
+    .Y(_037_)
   );
-  NOR _68_ (
-    .A(_30_),
-    .B(_31_),
-    .Y(_32_)
+  NOR _081_ (
+    .A(_036_),
+    .B(_037_),
+    .Y(_038_)
   );
-  NOR _69_ (
-    .A(_25_),
-    .B(_32_),
-    .Y(_04_)
+  NOR _082_ (
+    .A(_031_),
+    .B(_038_),
+    .Y(_005_)
   );
-  NOR _70_ (
-    .A(_06_),
+  NOR _083_ (
+    .A(_007_),
     .B(cont[1]),
-    .Y(_33_)
+    .Y(_039_)
   );
-  NOR _71_ (
-    .A(_11_),
-    .B(_30_),
-    .Y(_34_)
+  NOR _084_ (
+    .A(_013_),
+    .B(_036_),
+    .Y(_040_)
   );
-  NOR _72_ (
-    .A(_33_),
-    .B(_34_),
-    .Y(_35_)
+  NOR _085_ (
+    .A(_039_),
+    .B(_040_),
+    .Y(_041_)
   );
-  NOR _73_ (
-    .A(_25_),
-    .B(_35_),
-    .Y(_03_)
+  NOR _086_ (
+    .A(_031_),
+    .B(_041_),
+    .Y(_004_)
   );
-  NOR _74_ (
-    .A(_08_),
-    .B(empty),
-    .Y(_01_)
+  NAND _087_ (
+    .A(pop_toggle),
+    .B(reset),
+    .Y(_042_)
   );
-  NAND _75_ (
+  NOR _088_ (
+    .A(empty),
+    .B(_042_),
+    .Y(_001_)
+  );
+  NAND _089_ (
     .A(cont[1]),
     .B(push_0),
-    .Y(_36_)
+    .Y(_043_)
   );
-  NOT _76_ (
-    .A(_36_),
-    .Y(_37_)
+  NOT _090_ (
+    .A(_043_),
+    .Y(_044_)
   );
-  NOR _77_ (
-    .A(_27_),
-    .B(_37_),
-    .Y(_38_)
+  NOR _091_ (
+    .A(_033_),
+    .B(_044_),
+    .Y(_045_)
   );
-  NOR _78_ (
-    .A(_25_),
-    .B(_38_),
-    .Y(_02_)
+  NOR _092_ (
+    .A(_031_),
+    .B(_045_),
+    .Y(_003_)
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _79_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _093_ (
     .C(clk),
-    .D(_02_),
+    .D(_003_),
     .Q(push_0)
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _80_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _094_ (
     .C(clk),
-    .D(_01_),
+    .D(_001_),
     .Q(pop)
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _81_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _095_ (
     .C(clk),
-    .D(_03_),
+    .D(_004_),
     .Q(push_1)
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _82_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _096_ (
     .C(clk),
-    .D(_04_),
+    .D(_005_),
     .Q(push_2)
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _83_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _097_ (
     .C(clk),
-    .D(_05_),
+    .D(_006_),
     .Q(push_3)
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _84_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _098_ (
     .C(clk),
-    .D(_00_[0]),
+    .D(_000_[0]),
     .Q(cont[0])
   );
-  (* src = "referee_2_est.v:13" *)
-  DFF _85_ (
+  (* src = "referee_2_est.v:14" *)
+  DFF _099_ (
     .C(clk),
-    .D(_00_[1]),
+    .D(_000_[1]),
     .Q(cont[1])
+  );
+  (* src = "referee_2_est.v:14" *)
+  DFF _100_ (
+    .C(clk),
+    .D(_002_),
+    .Q(pop_toggle)
   );
 endmodule
