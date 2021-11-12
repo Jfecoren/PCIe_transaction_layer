@@ -38,7 +38,7 @@ module tester(
       pop <= 1;
       
       @(posedge clk);
-      pop <= 0;
+      pop <= 1;
 
       @(posedge clk);
       pop <= 1;
@@ -64,7 +64,7 @@ module tester(
       pop <= 1;
       
       @(posedge clk);
-      pop <= 0;
+      pop <= 1;
 
       @(posedge clk);
       pop <= 1;

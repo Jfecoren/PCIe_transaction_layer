@@ -3,7 +3,7 @@
 
 module fifo #( // the ALMOST bounds are parameters and can be changed ass required
     parameter ALMOST_FULL = 6,
-    parameter ALMOST_EMPTY = 1
+    parameter ALMOST_EMPTY = 0
 )(
     output reg [11:0] data_out,
     output reg 	      almost_full, almost_empty,
