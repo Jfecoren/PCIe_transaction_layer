@@ -3,7 +3,7 @@
 
 module fifo #( // the ALMOST bounds are parameters and can be changed ass required
     parameter ALMOST_FULL = 6,
-    parameter ALMOST_EMPTY = 1,
+    parameter ALMOST_EMPTY = 0,
 	parameter LINE_SIZE = 12,
 	parameter BLOCK_SIZE = 8,
 	parameter ADRRESS_SIZE = 3
