@@ -20,15 +20,48 @@ module tester_2 #(
             almost_empty_signal <= 1;
         @(posedge clk)
             almost_empty_signal <= 0;
-        @(posedge clk)
             data_in <= 12'b110111100100;
         @(posedge clk)
         @(posedge clk)
             data_in <= 12'b100101101100;
         @(posedge clk)
         @(posedge clk)
+            data_in <= 12'b000101101110;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b000101001100;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b100101100100;
+        @(posedge clk)
+        @(posedge clk)
+            almost_full_signal <= 4'b0100;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b010101111000;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b000101111000;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b010101101011;
+            almost_full_signal <= 0;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b010101111000;
+        @(posedge clk)
+        @(posedge clk)
+            data_in <= 12'b010101111000;
+        @(posedge clk)
+        @(posedge clk)
+        @(posedge clk)
+        @(posedge clk)
+        @(posedge clk)
         @(posedge clk)
             almost_empty_signal <= 1;
+        @(posedge clk)
+        @(posedge clk)
+        @(posedge clk)
         @(posedge clk)
 
 
