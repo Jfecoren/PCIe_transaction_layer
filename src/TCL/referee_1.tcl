@@ -1,4 +1,4 @@
-read_verilog -I ../referees referee_2.v
+read_verilog -I ../referee_2 referee_2.v
 hierarchy -check -top referee_2
 proc; opt; fsm; opt; memory; opt
 techmap; opt
