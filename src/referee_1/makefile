@@ -14,7 +14,7 @@ all: yosys emacs icarus
 
 yosys:
 	yosys -s $(YPATH)/$(TARGET).tcl
-	sed -i 's/referee_2/referee_2_str/' $(TARGET)_str.v
+	sed -i 's/referee_1/referee_1_str/' $(TARGET)_str.v
 	sed -i 's/push_signal/push_signal_str/g' $(TARGET)_str.v
 	sed -i 's/pop_signal/pop_signal_str/g' $(TARGET)_str.v
 	sed -i 's/data_out/data_out_str/g' $(TARGET)_str.v

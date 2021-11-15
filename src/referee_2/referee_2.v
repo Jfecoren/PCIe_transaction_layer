@@ -35,7 +35,6 @@ module referee_2 #(
                 if(~pop_toggle) begin
                     pop_toggle <= 1;
                     pop_signal <= 1;
-                    data_out <= data_in;
                 end
                 else begin
                     pop_signal <= 0;
@@ -49,7 +48,7 @@ module referee_2 #(
             end
             else if(push_toggle) begin
                 push_signal[data_in[LINE_SIZE-1 -: CLASS_BITS]] <= 1;
-                //push_signal[data_in[11:10]] <= 1;
+                data_out <= data_in;
                 push_toggle <= 0;
             end
             else begin
