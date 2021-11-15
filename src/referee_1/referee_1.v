@@ -10,7 +10,7 @@ module referee_1 (
     input empty_0, empty_1, empty_2, empty_3,
     input clk, reset
 );
-    reg [3:0] rr_pop_toggle;
+    //reg [3:0] rr_pop_toggle;
     reg [3:0] wrr_pop_toggle;
     reg [1:0] push_toggle;
     
@@ -26,11 +26,9 @@ module referee_1 (
             pop_2 <= 0;
             pop_3 <= 0;
             //data_out <= 0;
-            rr_pop_toggle <= 0;
             wrr_pop_toggle <= 0;
             push_toggle <= 0;
-            //cont <= 0;
-            //qos_flag <= 0;
+
         end
         else begin
             if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
@@ -38,7 +36,6 @@ module referee_1 (
                 push_1 <= 0;
                 push_2 <= 0;
                 push_3 <= 0;
-                rr_pop_toggle <= 0;
 
                 // WEIGHTED ROUND ROBIN STARTS FOR FIFOS
                                 
@@ -182,75 +179,140 @@ module referee_1 (
                     push_0 <= 1;
                     push_toggle <= push_toggle + 1;
                     if (empty_0|empty_1|empty_2|empty_3) begin
-                        if(rr_pop_toggle == 0)begin
+                        if(wrr_pop_toggle >= 0 && wrr_pop_toggle < 4)begin
                             if (empty_0) begin
                                 pop_3 <= 0;
                                 pop_0 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 4;
+                            end
+                            else if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_3 <= 0;                        
                                 pop_0 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 1)begin
+                        else if(wrr_pop_toggle >= 4  && wrr_pop_toggle < 7)begin
                             if (empty_1) begin
-                                pop_0 <= 0;                            
+                                pop_0 <= 0;
                                 pop_1 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 7;
+                            end
+                            else if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_0 <= 0;                        
                                 pop_1 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 2)begin
+                        else if(wrr_pop_toggle >= 7  && wrr_pop_toggle < 9)begin
                             if (empty_2) begin
                                 pop_1 <= 0;                            
                                 pop_2 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 9;
+                            end
+                            else if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_1 <= 0;                        
                                 pop_2 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 3)begin
-                            if (empty_3) begin
-                                pop_2 <= 0;                            
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
                                 pop_3 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
                             end
-                            else begin
-                                pop_2 <= 0;                        
-                                pop_3 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
+                        end
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
                             end
                         end
                     end
                     else begin
-                        if (rr_pop_toggle == 0) begin
-                            pop_3 <= 0;
-                            pop_0 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;
+                        if (wrr_pop_toggle >= 0 && wrr_pop_toggle < 4) begin
+                            if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_3 <= 0;
+                                pop_0 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end
                         end
-                        else if (rr_pop_toggle == 1) begin
-                            pop_0 <= 0;
-                            pop_1 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 4  && wrr_pop_toggle < 7) begin
+                            if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+
+                            end
+                            else begin 
+                                pop_0 <= 0;
+                                pop_1 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 2) begin
-                            pop_1 <= 0;
-                            pop_2 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 3) begin
-                            pop_2 <= 0;
-                            pop_3 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                                        
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
+                            end
                         end
                     end
                 end
@@ -259,231 +321,426 @@ module referee_1 (
                     push_1 <= 1;
                     push_toggle <= push_toggle + 1;
                     if (empty_0|empty_1|empty_2|empty_3) begin
-                        if(rr_pop_toggle == 0)begin
+                        if(wrr_pop_toggle >= 0 && wrr_pop_toggle < 4)begin
                             if (empty_0) begin
                                 pop_3 <= 0;
                                 pop_0 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 4;
+                            end
+                            else if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_3 <= 0;                        
                                 pop_0 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 1)begin
+                        else if(wrr_pop_toggle >= 4  && wrr_pop_toggle < 7)begin
                             if (empty_1) begin
-                                pop_0 <= 0;                            
+                                pop_0 <= 0;
                                 pop_1 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 7;
+                            end
+                            else if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_0 <= 0;                        
                                 pop_1 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 2)begin
+                        else if(wrr_pop_toggle >= 7  && wrr_pop_toggle < 9)begin
                             if (empty_2) begin
                                 pop_1 <= 0;                            
                                 pop_2 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 9;
+                            end
+                            else if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_1 <= 0;                        
                                 pop_2 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 3)begin
-                            if (empty_3) begin
-                                pop_2 <= 0;                            
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
                                 pop_3 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
                             end
-                            else begin
-                                pop_2 <= 0;                        
-                                pop_3 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
+                        end
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
                             end
                         end
                     end
                     else begin
-                        if (rr_pop_toggle == 0) begin
-                            pop_3 <= 0;
-                            pop_0 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;
+                        if (wrr_pop_toggle >= 0 && wrr_pop_toggle < 4) begin
+                            if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_3 <= 0;
+                                pop_0 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end
                         end
-                        else if (rr_pop_toggle == 1) begin
-                            pop_0 <= 0;
-                            pop_1 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 4  && wrr_pop_toggle < 7) begin
+                            if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+
+                            end
+                            else begin 
+                                pop_0 <= 0;
+                                pop_1 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 2) begin
-                            pop_1 <= 0;
-                            pop_2 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 3) begin
-                            pop_2 <= 0;
-                            pop_3 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                                        
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
+                            end
                         end
-                    end
+                    end                    
                 end
                 else if (push_toggle == 2) begin
                     push_1 <= 0;
                     push_2 <= 1;
                     push_toggle <= push_toggle + 1;
                     if (empty_0|empty_1|empty_2|empty_3) begin
-                        if(rr_pop_toggle == 0)begin
+                        if(wrr_pop_toggle >= 0 && wrr_pop_toggle < 4)begin
                             if (empty_0) begin
                                 pop_3 <= 0;
                                 pop_0 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 4;
+                            end
+                            else if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_3 <= 0;                        
                                 pop_0 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 1)begin
+                        else if(wrr_pop_toggle >= 4  && wrr_pop_toggle < 7)begin
                             if (empty_1) begin
-                                pop_0 <= 0;                            
+                                pop_0 <= 0;
                                 pop_1 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 7;
+                            end
+                            else if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_0 <= 0;                        
                                 pop_1 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 2)begin
+                        else if(wrr_pop_toggle >= 7  && wrr_pop_toggle < 9)begin
                             if (empty_2) begin
                                 pop_1 <= 0;                            
                                 pop_2 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 9;
+                            end
+                            else if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_1 <= 0;                        
                                 pop_2 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 3)begin
-                            if (empty_3) begin
-                                pop_2 <= 0;                            
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
                                 pop_3 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
                             end
-                            else begin
-                                pop_2 <= 0;                        
-                                pop_3 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
+                        end
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
                             end
                         end
                     end
                     else begin
-                        if (rr_pop_toggle == 0) begin
-                            pop_3 <= 0;
-                            pop_0 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;
+                        if (wrr_pop_toggle >= 0 && wrr_pop_toggle < 4) begin
+                            if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_3 <= 0;
+                                pop_0 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end
                         end
-                        else if (rr_pop_toggle == 1) begin
-                            pop_0 <= 0;
-                            pop_1 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 4  && wrr_pop_toggle < 7) begin
+                            if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+
+                            end
+                            else begin 
+                                pop_0 <= 0;
+                                pop_1 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 2) begin
-                            pop_1 <= 0;
-                            pop_2 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 3) begin
-                            pop_2 <= 0;
-                            pop_3 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                                        
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
+                            end
                         end
-                    end
+                    end                    
                 end
                 else if (push_toggle == 3) begin
                     push_2 <= 0;
                     push_3 <= 1;
                     push_toggle <= push_toggle + 1;
                     if (empty_0|empty_1|empty_2|empty_3) begin
-                        if(rr_pop_toggle == 0)begin
+                        if(wrr_pop_toggle >= 0 && wrr_pop_toggle < 4)begin
                             if (empty_0) begin
                                 pop_3 <= 0;
                                 pop_0 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 4;
+                            end
+                            else if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_3 <= 0;                        
                                 pop_0 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 1)begin
+                        else if(wrr_pop_toggle >= 4  && wrr_pop_toggle < 7)begin
                             if (empty_1) begin
-                                pop_0 <= 0;                            
+                                pop_0 <= 0;
                                 pop_1 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 7;
+                            end
+                            else if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_0 <= 0;                        
                                 pop_1 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 2)begin
+                        else if(wrr_pop_toggle >= 7  && wrr_pop_toggle < 9)begin
                             if (empty_2) begin
                                 pop_1 <= 0;                            
                                 pop_2 <= 0;
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= 9;
+                            end
+                            else if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
                             end
                             else begin
                                 pop_1 <= 0;                        
                                 pop_2 <= 1;                    
-                                rr_pop_toggle <= rr_pop_toggle + 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
                         end
-                        else if(rr_pop_toggle == 3)begin
-                            if (empty_3) begin
-                                pop_2 <= 0;                            
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
                                 pop_3 <= 0;
-                                rr_pop_toggle <= 0;
                             end
-                            else begin
-                                pop_2 <= 0;                        
-                                pop_3 <= 1;                    
-                                rr_pop_toggle <= 0;
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
+                        end
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
                             end
                         end
                     end
                     else begin
-                        if (rr_pop_toggle == 0) begin
-                            pop_3 <= 0;
-                            pop_0 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;
+                        if (wrr_pop_toggle >= 0 && wrr_pop_toggle < 4) begin
+                            if (pop_0 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_3 <= 0;
+                                pop_0 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end
                         end
-                        else if (rr_pop_toggle == 1) begin
-                            pop_0 <= 0;
-                            pop_1 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 4  && wrr_pop_toggle < 7) begin
+                            if (pop_1 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+
+                            end
+                            else begin 
+                                pop_0 <= 0;
+                                pop_1 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 2) begin
-                            pop_1 <= 0;
-                            pop_2 <= 1;
-                            rr_pop_toggle <= rr_pop_toggle + 1;                    
+                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
+                            if (pop_2 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_1 <= 0;
+                                pop_2 <= 1;
+                                wrr_pop_toggle <= wrr_pop_toggle + 1;
+                            end                   
                         end
-                        else if (rr_pop_toggle == 3) begin
-                            pop_2 <= 0;
-                            pop_3 <= 1;
-                            rr_pop_toggle <= 0;                                        
+                        else if (wrr_pop_toggle == 9) begin
+                            if (pop_3 == 1) begin
+                                pop_0 <= 0;
+                                pop_1 <= 0;
+                                pop_2 <= 0;
+                                pop_3 <= 0;
+                            end
+                            else begin 
+                                pop_2 <= 0;
+                                pop_3 <= 1;
+                                wrr_pop_toggle <= 0;
+                            end
                         end
-                    end
+                    end                    
                 end
             end
         end
