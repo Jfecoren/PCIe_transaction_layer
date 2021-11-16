@@ -1,0 +1,46 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Tue Nov 16 06:47:42 2021
+[*]
+[dumpfile] "/home/jordi/Desktop/Digitales2/Proyecto2/PCIe_transaction_layer/src/counters/contador.vcd"
+[dumpfile_mtime] "Tue Nov 16 06:46:19 2021"
+[dumpfile_size] 47399
+[savefile] "/home/jordi/Desktop/Digitales2/Proyecto2/PCIe_transaction_layer/src/counters/contador.gtkw"
+[timestart] 0
+[size] 1920 935
+[pos] -919 -1
+*-16.905540 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 196
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 273
+@28
+BancoPruebas.reset
+BancoPruebas.clk
+@24
+BancoPruebas.data_in[11:0]
+@c00024
+BancoPruebas.cuenta[15:0]
+@28
+(0)BancoPruebas.cuenta[15:0]
+(1)BancoPruebas.cuenta[15:0]
+(2)BancoPruebas.cuenta[15:0]
+(3)BancoPruebas.cuenta[15:0]
+(4)BancoPruebas.cuenta[15:0]
+(5)BancoPruebas.cuenta[15:0]
+(6)BancoPruebas.cuenta[15:0]
+(7)BancoPruebas.cuenta[15:0]
+(8)BancoPruebas.cuenta[15:0]
+(9)BancoPruebas.cuenta[15:0]
+(10)BancoPruebas.cuenta[15:0]
+(11)BancoPruebas.cuenta[15:0]
+(12)BancoPruebas.cuenta[15:0]
+(13)BancoPruebas.cuenta[15:0]
+(14)BancoPruebas.cuenta[15:0]
+(15)BancoPruebas.cuenta[15:0]
+@1401204
+-group_end
+@24
+BancoPruebas.cuenta_est[15:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,67 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Mon Nov 15 23:19:35 2021
+[*]
+[dumpfile] "/home/luis/Documents/Digitales_II/PCIe_transaction_layer/src/referee_1/referee_1.vcd"
+[dumpfile_mtime] "Mon Nov 15 23:10:56 2021"
+[dumpfile_size] 39946
+[savefile] "/home/luis/Desktop/referee_1.vcd.gtkw"
+[timestart] 0
+[size] 1848 1136
+[pos] -134 -134
+*-13.584886 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[sst_width] 233
+[signals_width] 214
+[sst_expanded] 1
+[sst_vpaned_height] 331
+@200
+-Descripcion Conductual
+@28
+testbench.referee_1_cond.almost_full_0
+testbench.referee_1_cond.almost_full_1
+testbench.referee_1_cond.almost_full_2
+testbench.referee_1_cond.almost_full_3
+testbench.referee_1_cond.clk
+testbench.referee_1_cond.empty_0
+testbench.referee_1_cond.empty_1
+testbench.referee_1_cond.empty_2
+testbench.referee_1_cond.empty_3
+testbench.referee_1_cond.pop_0
+testbench.referee_1_cond.pop_1
+testbench.referee_1_cond.pop_2
+testbench.referee_1_cond.pop_3
+testbench.referee_1_cond.push_0
+testbench.referee_1_cond.push_1
+testbench.referee_1_cond.push_2
+testbench.referee_1_cond.push_3
+testbench.referee_1_cond.push_toggle[1:0]
+testbench.referee_1_cond.reset
+@22
+testbench.referee_1_cond.wrr_pop_toggle[3:0]
+@200
+-Descripcion Estructural
+@29
+testbench.referee_1_strl.almost_full_0
+testbench.referee_1_strl.almost_full_1
+testbench.referee_1_strl.almost_full_2
+testbench.referee_1_strl.almost_full_3
+testbench.referee_1_strl.clk
+testbench.referee_1_strl.empty_0
+testbench.referee_1_strl.empty_1
+testbench.referee_1_strl.empty_2
+testbench.referee_1_strl.empty_3
+testbench.referee_1_strl.pop_0
+testbench.referee_1_strl.pop_1
+testbench.referee_1_strl.pop_2
+testbench.referee_1_strl.pop_3
+testbench.referee_1_strl.push_0
+testbench.referee_1_strl.push_1
+testbench.referee_1_strl.push_2
+testbench.referee_1_strl.push_3
+testbench.referee_1_strl.push_toggle[1:0]
+testbench.referee_1_strl.reset
+@23
+testbench.referee_1_strl.wrr_pop_toggle[3:0]
+[pattern_trace] 1
+[pattern_trace] 0

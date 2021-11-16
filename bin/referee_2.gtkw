@@ -1,0 +1,82 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Sat Nov 13 02:13:00 2021
+[*]
+[dumpfile] "/home/luis/Documents/Digitales_II/PCIe_transaction_layer/src/referee_2/referee_2.vcd"
+[dumpfile_mtime] "Sat Nov 13 02:07:20 2021"
+[dumpfile_size] 14933
+[savefile] "/home/luis/Desktop/referee_2.vcd.gtkw"
+[timestart] 0
+[size] 1848 1136
+[pos] -89 -89
+*-13.501889 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[sst_width] 233
+[signals_width] 214
+[sst_expanded] 1
+[sst_vpaned_height] 331
+@200
+-Descripcion Conductual
+@28
+[color] 2
+testbench.referee_2_cond.almost_full_0
+[color] 2
+testbench.referee_2_cond.almost_full_1
+[color] 2
+testbench.referee_2_cond.almost_full_2
+[color] 2
+testbench.referee_2_cond.almost_full_3
+[color] 5
+testbench.referee_2_cond.clk
+[color] 7
+testbench.referee_2_cond.cont[1:0]
+[color] 3
+testbench.referee_2_cond.empty
+[color] 4
+testbench.referee_2_cond.pop
+[color] 1
+testbench.referee_2_cond.pop_toggle
+[color] 4
+testbench.referee_2_cond.push_0
+[color] 4
+testbench.referee_2_cond.push_1
+[color] 4
+testbench.referee_2_cond.push_2
+[color] 4
+testbench.referee_2_cond.push_3
+@29
+[color] 1
+testbench.referee_2_cond.reset
+@200
+-Descripcion Estructural
+@28
+[color] 2
+testbench.referee_2_strl.almost_full_0
+[color] 2
+testbench.referee_2_strl.almost_full_1
+[color] 2
+testbench.referee_2_strl.almost_full_2
+[color] 2
+testbench.referee_2_strl.almost_full_3
+[color] 5
+testbench.referee_2_strl.clk
+[color] 7
+testbench.referee_2_strl.cont[1:0]
+[color] 3
+testbench.referee_2_strl.empty
+[color] 4
+testbench.referee_2_strl.pop
+[color] 1
+testbench.referee_2_strl.pop_toggle
+[color] 4
+testbench.referee_2_strl.push_0
+[color] 4
+testbench.referee_2_strl.push_1
+[color] 4
+testbench.referee_2_strl.push_2
+[color] 4
+testbench.referee_2_strl.push_3
+[color] 1
+testbench.referee_2_strl.reset
+[pattern_trace] 1
+[pattern_trace] 0
