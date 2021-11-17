@@ -1,8 +1,9 @@
 module probador(
-		input [15:0] 	  cuenta,
-		input [15:0] 	  cuenta_est,
-		output reg [11:0] data_in,
-		output reg 	  reset,
+		input [4:0] 	  cuenta,
+		input [4:0] 	  cuenta_est,
+		output reg [11:0] data_in, data_low,
+		output reg [2:0]  idx,
+		output reg 	  reset, req, idle,
 		output reg 	  clk
 		);
 
@@ -11,7 +12,7 @@ module probador(
       $dumpvars;		// Directiva para "dumpear" variables
 
       // Valores iniciales cero
-      {data_in, reset} = 0;
+      {data_in, reset, req, idle, idx, data_low} = 0;
 
       @(posedge clk);
       @(posedge clk);
@@ -32,31 +33,53 @@ module probador(
       data_in <= 'b0011;
 
       @(posedge clk);
+      idx <= 0;
+      idle <= 1;
+      
       @(posedge clk);
+      idle <= 0;
+      
       @(posedge clk);
 
       @(posedge clk);
       data_in <= 'b0000;
+      idx <= 1;
+      idle <= 1;
 
       @(posedge clk);
       data_in <= 'b0001;
+      idle <= 0;
+      
 
       @(posedge clk);
       data_in <= 'b0010;
+      idx <= 2;
+      idle <= 1;
 
       @(posedge clk);
       data_in <= 'b0011;
+      idle <= 0;
+      
+      @(posedge clk);
+      
+      @(posedge clk);
+      idx <= 3;
+      idle <= 1;
+      
+      @(posedge clk);
+      data_in <= 'b0010;
+      idle <= 0;
+      
       @(posedge clk);
       
       @(posedge clk);
       @(posedge clk);
-      data_in <= 'b0010;
-      @(posedge clk);
-      
-      @(posedge clk);
-      @(posedge clk);
       data_in <= 'b0011;
+      idx <= 4;
+      idle <= 1;
       @(posedge clk);
+      idle <= 0;
+      
       @(posedge clk);
       data_in <= 'b0000;
       @(posedge clk);

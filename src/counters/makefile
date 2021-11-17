@@ -18,7 +18,7 @@ all:
 	@echo "\nFin. Utilice <make wave> para generar onda del archivo, o <make clean> par borrar los archivos temporales."
 wave:
 	gtkwave $(OUTPUT1)
-
+	
 clean:
 	rm -f $(OUTPUT0)
 	rm -f $(OUTPUT1)

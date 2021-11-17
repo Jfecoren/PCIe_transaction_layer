@@ -2,7 +2,7 @@ module contador(
 		input [11:0] 	 data_in,
 		input 		 reset,
 		input 		 clk,
-		output reg [15:0] cuenta
+		output reg [4:0] cuenta
 		);
    reg [11:0] 			 detector;
    
