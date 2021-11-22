@@ -3,6 +3,7 @@ module probador(
 		input [4:0] 	  cuenta_est,
 		output reg [11:0] data_in, data_low,
 		output reg [2:0]  idx,
+		output reg [3:0]  state,
 		output reg 	  reset, req, idle,
 		output reg 	  clk
 		);
@@ -12,12 +13,14 @@ module probador(
       $dumpvars;		// Directiva para "dumpear" variables
 
       // Valores iniciales cero
-      {data_in, reset, req, idle, idx, data_low} = 0;
+      {data_in, req, idle, idx, data_low, reset} = 0;
 
       @(posedge clk);
-      @(posedge clk);
       reset <= 1;
+      state <= 'b0001;
+ 
       @(posedge clk);
+      state <= 'b1000;
       @(posedge clk);
       
       @(posedge clk);
@@ -34,41 +37,42 @@ module probador(
 
       @(posedge clk);
       idx <= 0;
-      idle <= 1;
+      state <= 'b0100;
+      req <= 1;
       
       @(posedge clk);
-      idle <= 0;
+      state <= 'b1000;
       
       @(posedge clk);
 
       @(posedge clk);
       data_in <= 'b0000;
       idx <= 1;
-      idle <= 1;
+      state <= 'b0100;
 
       @(posedge clk);
       data_in <= 'b0001;
-      idle <= 0;
+      state <= 'b1000;
       
 
       @(posedge clk);
       data_in <= 'b0010;
       idx <= 2;
-      idle <= 1;
+      state <= 'b0100;
 
       @(posedge clk);
       data_in <= 'b0011;
-      idle <= 0;
+      state <= 'b1000;
       
       @(posedge clk);
       
       @(posedge clk);
       idx <= 3;
-      idle <= 1;
+      state <= 'b0100;
       
       @(posedge clk);
       data_in <= 'b0010;
-      idle <= 0;
+      state <= 'b1000;
       
       @(posedge clk);
       
@@ -76,101 +80,10 @@ module probador(
       @(posedge clk);
       data_in <= 'b0011;
       idx <= 4;
-      idle <= 1;
+      state <= 'b0100;
       @(posedge clk);
-      idle <= 0;
+      state <= 'b1000;
       
-      @(posedge clk);
-      data_in <= 'b0000;
-      @(posedge clk);
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
-       @(posedge clk);
-      data_in <= 'b0000;
-
-      @(posedge clk);
-      data_in <= 'b0001;
-
-      @(posedge clk);
-      data_in <= 'b0010;
-
-      @(posedge clk);
-      data_in <= 'b0011;
 
       // Termina de almacenar senales
       $finish;			
