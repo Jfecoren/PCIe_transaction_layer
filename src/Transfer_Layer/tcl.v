@@ -17,6 +17,16 @@ module tcl(
 	   output reg [4:0] counterOut,
 	   output reg [11:0] dataOutputP0, dataOutputP1, dataOutputP2, dataOutputP3
 	   );
+
+   wire 		     clk, reset, init, empty0, empty1, empty2, empty3, empty4, empty5, empty6, empty7, counterValid, req, push_P0_A1, push_P1_A1, push_P2_A1, push_P3_A1, pop_P0_A1, pop_P1_A1, pop_P2_A1, pop_P3_A1;
+   wire 		     almost_full_P0_A1, almost_full_P1_A1, almost_full_P2_A1, almost_full_P3_A1, almost_empty_P0_A1, almost_empty_P1_A1, almost_empty_P2_A1, almost_empty_P3_A1, push_P0_A2, push_P1_A2, push_P2_A2, push_P3_A2;
+   wire 		     almost_full_P0_A2, almost_full_P1_A2, almost_full_P2_A2, almost_full_P3_A2, almost_empty_A2, pushIn, pop_A2, popOutP0, popOutP1, popOutP2, popOutP3;
+   wire [2:0] 		     umbral_AF_in, umbral_AE_in, Umbral_alto, Umbral_bajo, idx;
+   wire [3:0] 		     state;
+   wire [4:0] 		     cuenta0, cuenta1, cuenta2, cuenta3, cuenta4, counterOut;
+   wire [11:0] 		     data_Output_P0, data_Output_P1, data_Output_P2, data_Output_P3, dataInFIFO, dataInP0, dataInP1, dataInP2, dataInP3, dataOutP0, dataOutP1, dataOutP2, dataOutP3, demuxOut;
+   wire [11:0] 		     dataMidP0, dataMidP1, dataMidP2, dataMidP3, dataInputFIFO;
+   
    // Maquina de Estados
    state_machine maquinaEstados(
 				// Outputs
@@ -135,7 +145,7 @@ module tcl(
 				  .p3			(dataInP3[11:0]),
 				  // Inputs
 				  .dataInput		(dataInFIFO[11:0]),
-				  .states		(states[3:0]),
+				  .states		(state[3:0]),
 				  .clk			(clk));
    // Multiplexor salidas
    multiplexOut multiplexorSalida(
@@ -146,7 +156,7 @@ module tcl(
 				  .out3			(dataOutP3[11:0]),
 				  // Inputs
 				  .dataInput		(demuxOut[11:0]),
-				  .states		(states[3:0]),
+				  .states		(state[3:0]),
 				  .clk			(clk));
    // Demultiplexor
    demultiplex demultiplexor(
