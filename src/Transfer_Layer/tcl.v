@@ -10,22 +10,22 @@
 `include "multiplexOut.v"
 
 module tcl(
-	   input clk, req, reset, init, popOutP0, popOutP1, popOutP2, popOutP3, pushIn,
-	   input [2:0] Umbral_bajo, Umbral_alto, idx,
-	   input [11:0] dataInputFIFO,
-	   output reg counterValid,
-	   output reg [4:0] counterOut,
-	   output reg [11:0] dataOutputP0, dataOutputP1, dataOutputP2, dataOutputP3
+	   input 	 clk, req, reset, init, popOutP0, popOutP1, popOutP2, popOutP3, pushIn,
+	   input [2:0] 	 Umbral_bajo, Umbral_alto, idx,
+	   input [11:0]  dataInputFIFO,
+	   output 	 counterValid,
+	   output [4:0]  counterOut,
+	   output [11:0] dataOutputP0, dataOutputP1, dataOutputP2, dataOutputP3
 	   );
 
-   wire 		     clk, reset, init, empty0, empty1, empty2, empty3, empty4, empty5, empty6, empty7, counterValid, req, push_P0_A1, push_P1_A1, push_P2_A1, push_P3_A1, pop_P0_A1, pop_P1_A1, pop_P2_A1, pop_P3_A1;
+   wire 		     clk, reset, init, empty0, empty1, empty2, empty3, empty4, empty5, empty6, empty7, req, push_P0_A1, push_P1_A1, push_P2_A1, push_P3_A1, pop_P0_A1, pop_P1_A1, pop_P2_A1, pop_P3_A1;
    wire 		     almost_full_P0_A1, almost_full_P1_A1, almost_full_P2_A1, almost_full_P3_A1, almost_empty_P0_A1, almost_empty_P1_A1, almost_empty_P2_A1, almost_empty_P3_A1, push_P0_A2, push_P1_A2, push_P2_A2, push_P3_A2;
-   wire 		     almost_full_P0_A2, almost_full_P1_A2, almost_full_P2_A2, almost_full_P3_A2, almost_empty_A2, pushIn, pop_A2, popOutP0, popOutP1, popOutP2, popOutP3;
+   wire 		     almost_full_P0_A2, almost_full_P1_A2, almost_full_P2_A2, almost_full_P3_A2, almost_empty_A2, pushIn, pop_A2, popOutP0, popOutP1, popOutP2, popOutP3, counterValid;
    wire [2:0] 		     umbral_AF_in, umbral_AE_in, Umbral_alto, Umbral_bajo, idx;
    wire [3:0] 		     state;
    wire [4:0] 		     cuenta0, cuenta1, cuenta2, cuenta3, cuenta4, counterOut;
-   wire [11:0] 		     data_Output_P0, data_Output_P1, data_Output_P2, data_Output_P3, dataInFIFO, dataInP0, dataInP1, dataInP2, dataInP3, dataOutP0, dataOutP1, dataOutP2, dataOutP3, demuxOut;
-   wire [11:0] 		     dataMidP0, dataMidP1, dataMidP2, dataMidP3, dataInputFIFO;
+   wire [11:0] 		     dataInFIFO, dataInP0, dataInP1, dataInP2, dataInP3, dataOutP0, dataOutP1, dataOutP2, dataOutP3, demuxOut;
+   wire [11:0] 		     dataMidP0, dataMidP1, dataMidP2, dataMidP3, dataInputFIFO, dataOutputP0, dataOutputP1, dataOutputP2, dataOutputP3;
    
    // Maquina de Estados
    state_machine maquinaEstados(
@@ -39,10 +39,10 @@ module tcl(
 				.Umbral_alto	(Umbral_alto[2:0]), 
 				.reset		(reset),            
 				.init		(init),             
-				.empty0		(empty0),
-				.empty1		(empty1),
-				.empty2		(empty2),
-				.empty3		(empty3),
+				.empty0		(almost_empty_P0_A1),
+				.empty1		(almost_empty_P1_A1),
+				.empty2		(almost_empty_P2_A1),
+				.empty3		(almost_empty_P3_A1),
 				.empty4		(empty4),
 				.empty5		(empty5),
 				.empty6		(empty6),
@@ -67,28 +67,28 @@ module tcl(
 	       // Outputs
 	       .cuenta			(cuenta0[4:0]),
 	       // Inputs
-	       .data_in			(data_Output_P0[11:0]),
+	       .data_in			(dataOutputP0[11:0]),
 	       .state			(state[3:0]),
 	       .clk			(clk));
    contador c1(
 	       // Outputs
 	       .cuenta			(cuenta1[4:0]),
 	       // Inputs
-	       .data_in			(data_Output_P1[11:0]),
+	       .data_in			(dataOutputP1[11:0]),
 	       .state			(state[3:0]),
 	       .clk			(clk));
    contador c2(
 	       // Outputs
 	       .cuenta			(cuenta2[4:0]),
 	       // Inputs
-	       .data_in			(data_Output_P2[11:0]),
+	       .data_in			(dataOutputP2[11:0]),
 	       .state			(state[3:0]),
 	       .clk			(clk));
    contador c3(
 	       // Outputs
 	       .cuenta			(cuenta3[4:0]),
 	       // Inputs
-	       .data_in			(data_Output_P3[11:0]),
+	       .data_in			(dataOutputP3[11:0]),
 	       .state			(state[3:0]),
 	       .clk			(clk));
    contador c4(
@@ -120,7 +120,7 @@ module tcl(
 		      .empty_2		(almost_empty_P2_A1),
 		      .empty_3		(almost_empty_P3_A1),
 		      .clk		(clk),
-		      .reset		(reset)); //Hay que cambiar a estado
+		      .state		(state[3:0])); //Hay que cambiar a estado
    referee_2 arbitro2(
 		      // Outputs
 		      .push_0		(push_P0_A2),
@@ -135,7 +135,7 @@ module tcl(
 		      .almost_full_3	(almost_full_P3_A2),
 		      .empty		(almost_empty_A2),
 		      .clk		(clk),
-		      .reset		(reset)); //Hay que cambiar a estado
+		      .state		(state[3:0])); //Hay que cambiar a estado
    // Multiplexor entradas
    multiplexIn multiplexorEntrada(
 				  // Outputs
