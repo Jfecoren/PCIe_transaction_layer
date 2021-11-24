@@ -72,6 +72,17 @@ module fifo(
           /*  push logic: receive push signal from respective Referee
            *  how address is updated, its saves the data and updates the write pointer
            */
+
+         if(push && pop && memory_state != 0) begin
+            data_w <= data_in;
+	         addr_w <= addr_w + 1;
+	         addr_r <= addr_r + 1;
+	         data_out <= data_r;
+            memory_state <= memory_state;
+         end
+
+
+
           if(push) begin
              data_w <= data_in;
 	     addr_w <= addr_w + 1;

@@ -61,32 +61,48 @@ module fifo(
        end else if(state == 'b0100) begin
 	  data_out <= 0;
        end else if(state == 'b1000) begin
-	  if(/*SUGGESTION*/ memory_state >= umbral_AF)
-            almost_full <= 1;
-          else if(/*SUGGESTION*/ memory_state <= umbral_AE)
-            almost_empty <= 1;
-          else begin
-             almost_full <= 0;
-             almost_empty <= 0;
-          end
+	  
+
+
           /*  push logic: receive push signal from respective Referee
            *  how address is updated, its saves the data and updates the write pointer
            */
-          if(push) begin
-             data_w <= data_in;
-	     addr_w <= addr_w + 1;
-             memory_state <= memory_state + 1; // Possible-bug: Short-circuit with itself pop logic
+         if(push & pop) begin
+            data_w <= data_in;
+	         addr_w <= addr_w + 1;
+	         addr_r <= addr_r + 1;
+	         data_out <= data_r;
+            memory_state <= memory_state;
+         end
+
+          if(push & ~pop) begin
+            data_w <= data_in;
+	         addr_w <= addr_w + 1;
+            memory_state <= memory_state + 1; // Possible-bug: Short-circuit with itself pop logic
           end
           /*  pop logic: receive pop signal from respective Referee
            *  how address is updated, its ask for the data in that address and updates the read pointer
            */
-          else if(pop) begin
-	     addr_r <= addr_r + 1;
-	     data_out <= data_r;
-             memory_state <= memory_state - 1; // Possible-bug: Short-circuit with itself push logic
+          if(pop & ~push) begin
+	         addr_r <= addr_r + 1;
+	         data_out <= data_r;
+            memory_state <= memory_state - 1; // Possible-bug: Short-circuit with itself push logic
              // flag for read memory is missing
           end
+           if(/*SUGGESTION*/ memory_state >= umbral_AF)
+                     almost_full <= 1;
+                  else if(/*SUGGESTION*/ memory_state <= umbral_AE)
+                     almost_empty <= 1;
+                  else begin
+                     almost_full <= 0;
+                     almost_empty <= 0;
+                  end
        end // if (reset)
+
+        
+
+
+
     end // always @ (posedge clk)
    
 endmodule // fifo	      

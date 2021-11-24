@@ -19,7 +19,7 @@ all:
 	#sed -i 's/true_dpram_sclk/true_dpram_sclk_est/' $(TARGET1)
 	#emacs --batch $(TESTBENCH0) -f verilog-batch-auto
 	#@echo "Compilando Verilog"
-	$(CC) -o $(OUTPUT0) $(TESTBENCH0) $(VFLAGS)
+	$(CC) -o $(OUTPUT0) $(TESTBENCH0)
 	vvp $(OUTPUT0)
 wave:
 	gtkwave $(OUTPUT1)
