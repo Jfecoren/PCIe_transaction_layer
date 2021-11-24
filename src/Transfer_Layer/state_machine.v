@@ -34,7 +34,7 @@ end
 
 always @(*) begin
     if (reset) begin
-        State <= RESET;
+        State = RESET;
         Nxt_State=0;
     end
 
@@ -52,7 +52,7 @@ always @(*) begin
         end
         // IDLE
         IDLE: begin
-            if (empty0==0||empty1==0||empty2==0||empty3==0||empty4==0||empty5==0||empty6==0||empty7==0 ) begin
+            if (empty0==0||empty1==0||empty2==0||empty3==0||empty4==0||empty5==0||empty6==0||empty7==0) begin
                 Nxt_State=ACTIVE;
             end
             else begin
