@@ -69,6 +69,7 @@ module probador(
       popOutP3 <= 1;
       
       @(posedge clk);
+      pushIn <= 0;
       @(posedge clk);
       @(posedge clk);
       @(posedge clk);

@@ -22,7 +22,7 @@ module referee_2 (
             cont <= 0;
             pop_toggle <= 1;
         end
-        else begin
+        else if(state == 'b1000) begin
             if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
                 push_0 <= 0;
                 push_1 <= 0;
