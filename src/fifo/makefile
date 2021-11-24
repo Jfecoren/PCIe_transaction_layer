@@ -18,6 +18,7 @@ yosys:
 	sed -i 's/data_out/data_out_str/g' $(TARGET)_str.v
 	sed -i 's/almost_full/almost_full_str/g' $(TARGET)_str.v
 	sed -i 's/almost_empty/almost_empty_str/g' $(TARGET)_str.v
+	sed -i 's/empty_f/empty_f_str/g' $(TARGET)_str.v
 	sed -i 's/true_dpram_sclk/true_dpram_sclk_str/' $(TARGET)_str.v
 
 emacs:
