@@ -1,25 +1,33 @@
 CC = iverilog
-TARGET0 = contador.v
-TARGET1 = contador_est.v
-OUTPUT0 = contador.out
-OUTPUT1 = contador.vcd
-TESTBENCH0 = BancoPruebas.v
+TARGET = counters
+OUTPUT = $(TARGET)
+
+TESTBENCH = testbench
 YPATH = ../TCL
 VFLAGS = -I ../../include
 
-all:
-	yosys -s $(YPATH)/contador.tcl
-	sed -i 's/contador/contador_est/' $(TARGET1)
-	sed -i 's/cuenta/cuenta_est/g' $(TARGET1)
-	emacs --batch $(TESTBENCH0) -f verilog-batch-auto
-	@echo "Compilando Verilog"
-	$(CC) -o $(OUTPUT0) $(TESTBENCH0) $(VFLAGS)
-	vvp $(OUTPUT0)
-	@echo "\nFin. Utilice <make wave> para generar onda del archivo, o <make clean> par borrar los archivos temporales."
+all: yosys emacs icarus
+
+yosys:
+	yosys -s $(YPATH)/$(TARGET).tcl
+	sed -i 's/counters/counters_str/' $(TARGET)_str.v
+	sed -i 's/counts/counts_str/g' $(TARGET)_str.v
+emacs:
+	emacs --batch $(TESTBENCH).v -f verilog-batch-auto
+
+icarus:
+	@echo "Compiling Verilog"
+	$(CC) -o $(OUTPUT).out $(TESTBENCH).v $(VFLAGS)
+	vvp $(OUTPUT).out
+	@echo "\nFinished. \nUse <make wave> to open signal visualizer, or <make gtk> to open default signals view."
+
 wave:
-	gtkwave $(OUTPUT1)
-	
+	gtkwave $(OUTPUT).vcd
+
+gtk:
+	gtkwave $(OUTPUT).gtkw
+
 clean:
-	rm -f $(OUTPUT0)
-	rm -f $(OUTPUT1)
+	rm -f $(TARGET)_str.v
+	rm -f *.o *.out *.vcd
 

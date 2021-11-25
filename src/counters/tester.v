@@ -1,36 +1,35 @@
-module probador(
-		input [4:0] 	  cuenta,
-		input [4:0] 	  cuenta_est,
+module tester(
+		input [4:0] 	  counts,
+		input [4:0] 	  counts_str,
 		output reg [11:0] data_in, data_low,
-		output reg [2:0]  idx,
-		output reg [3:0]  state,
-		output reg 	  reset, req, idle,
-		output reg 	  clk
+		output reg [2:0] idx,
+		output reg [3:0] state,
+		output reg req, idle,
+		output reg clk
 		);
 
    initial begin
-      $dumpfile("contador.vcd");	// Nombre de archivo del "dump"
+      $dumpfile("counters.vcd");	// Nombre de archivo del "dump"
       $dumpvars;		// Directiva para "dumpear" variables
 
       // Valores iniciales cero
-      {data_in, req, idle, idx, data_low, reset} = 0;
+      {data_in, req, idle, idx, data_low} = 0;
 
       @(posedge clk);
-      reset <= 1;
-      state <= 'b0001;
+         state <= 'b0001;
  
       @(posedge clk);
-      state <= 'b1000;
+         state <= 'b1000;
       @(posedge clk);
       
       @(posedge clk);
-      data_in <= 'b0000;
+         data_in <= 'b0000;
 
       @(posedge clk);
-      data_in <= 'b0001;
+         data_in <= 'b0001;
 
       @(posedge clk);
-      data_in <= 'b0010;
+         data_in <= 'b0010;
 
       @(posedge clk);
       data_in <= 'b0011;

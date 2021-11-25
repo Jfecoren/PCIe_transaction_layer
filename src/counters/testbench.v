@@ -2,16 +2,16 @@
 // escala	unidad temporal (valor de "#1") / precision
 // includes de archivos de verilog
 `include "cmos_cells.v"
-`include "contador.v"
-`include "contador_est.v"
-`include "mux.v"
-`include "probador.v"
+`include "counters.v"
+`include "counters_str.v"
+`include "counter_mux.v"
+`include "tester.v"
 
-module BancoPruebas; // Testbench
+module testbench; // Testbench
 
-   wire reset, clk, req, idle;
+   wire reset, clk, req, idle, valid, valid_str;
    wire [11:0] data_in, data_low;
-   wire [4:0]  cuenta, cuenta_est, cuenta0, cuenta1, cuenta2, cuenta3, cuenta4, cuenta_est0, cuenta_est1, cuenta_est2, cuenta_est3, cuenta_est4;
+   wire [7:0]  counts, counts_str, counts0, counts1, counts2, counts3, counts4, counts_str0, counts_str1, counts_str2, counts_str3, counts_str4;
    wire [2:0]  idx;
    wire [3:0]  state;
    
@@ -19,125 +19,124 @@ module BancoPruebas; // Testbench
    
    
    // Descripcion conductual del circuito
-   contador contador_cond0(
+   counters counters_cond0(
 			   // Outputs
-			   .cuenta		(cuenta0[4:0]),
+			   .counts		(counts0),
 			   // Inputs
 			   .data_in		(data_in[11:0]),
 			   .state		(state),
 			   .clk			(clk));
-   contador contador_cond1(
+   counters counters_cond1(
 			   // Outputs
-			   .cuenta		(cuenta1[4:0]),
+			   .counts		(counts1),
 			   // Inputs
 			   .data_in		(data_low),
 			   .state		(state),
 			   .clk			(clk));
-   contador contador_cond2(
+   counters counters_cond2(
 			   // Outputs
-			   .cuenta		(cuenta2[4:0]),
+			   .counts		(counts2),
 			   // Inputs
 			   .data_in		(data_in[11:0]),
 			   .state		(state),
 			   .clk			(clk));
-   contador contador_cond3(
+   counters counters_cond3(
 			   // Outputs
-			   .cuenta		(cuenta3[4:0]),
+			   .counts		(counts3),
 			   // Inputs
 			   .data_in		(data_low),
 			   .state		(state),
 			   .clk			(clk));
-   contador contador_cond4(
+   counters counters_cond4(
 			   // Outputs
-			   .cuenta		(cuenta4[4:0]),
+			   .counts		(counts4),
 			   // Inputs
 			   .data_in		(data_in[11:0]),
 			   .state		(state),
 			   .clk			(clk));
    
    // Descripcion estructural del circuito
-   contador_est contador_est0(
+   counters_str counters_str0(
 			      // Outputs
-			      .cuenta_est	(cuenta_est0[4:0]),
+			      .counts_str	(counts_str0),
 			      // Inputs
 			      .clk		(clk),
 			      .data_in		(data_in[11:0]),
 			      .state		(state));
-   contador_est contador_est1(
+   counters_str counters_str1(
 			      // Outputs
-			      .cuenta_est	(cuenta_est1[4:0]),
+			      .counts_str	(counts_str1),
 			      // Inputs
 			      .clk		(clk),
 			      .data_in		(data_low),
 			      .state		(state));
-   contador_est contador_est2(
+   counters_str counters_str2(
 			      // Outputs
-			      .cuenta_est	(cuenta_est2[4:0]),
+			      .counts_str	(counts_str2),
 			      // Inputs
 			      .clk		(clk),
 			      .data_in		(data_in[11:0]),
 			      .state		(state));
-   contador_est contador_est3(
+   counters_str counters_str3(
 			      // Outputs
-			      .cuenta_est	(cuenta_est3[4:0]),
+			      .counts_str	(counts_str3),
 			      // Inputs
 			      .clk		(clk),
 			      .data_in		(data_low),
 			      .state		(state));
-   contador_est contador_est4(
+   counters_str counters_str4(
 			      // Outputs
-			      .cuenta_est	(cuenta_est4[4:0]),
+			      .counts_str	(counts_str4),
 			      // Inputs
 			      .clk		(clk),
 			      .data_in		(data_in[11:0]),
 			      .state		(state));
    
    // Mux para manejar entradas
-   mux mux_cond(
+   counter_mux mux_cond(
 		// Outputs
-		.data			(cuenta[4:0]),
+		.data			(counts),
 		.valid			(valid),
 		// Inputs
-		.in0			(cuenta0[4:0]),
-		.in1			(cuenta1[4:0]),
-		.in2			(cuenta2[4:0]),
-		.in3			(cuenta3[4:0]),
-		.in4			(cuenta4[4:0]),
+		.in0			(counts0),
+		.in1			(counts1),
+		.in2			(counts2),
+		.in3			(counts3),
+		.in4			(counts4),
 		.idx			(idx[2:0]),
 		.req			(req),
 	        .state			(state[3:0]),
 		.clk			(clk));
    
    
-   mux mux_est(
+   counter_mux mux_str(
 		// Outputs
-		.data			(cuenta_est[4:0]),
-		.valid			(valid_est),
+		.data			(counts_str),
+		.valid			(valid_str),
 		// Inputs
-		.in0			(cuenta_est0[4:0]),
-		.in1			(cuenta_est1[4:0]),
-		.in2			(cuenta_est2[4:0]),
-		.in3			(cuenta_est3[4:0]),
-		.in4			(cuenta_est4[4:0]),
+		.in0			(counts_str0),
+		.in1			(counts_str1),
+		.in2			(counts_str2),
+		.in3			(counts_str3),
+		.in4			(counts_str4),
 		.idx			(idx[2:0]),
 		.req			(req),
-	        .state			(state[3:0]),
+	    .state			(state[3:0]),
 		.clk			(clk));
    
 
    // Probador: generador de senales y monitor
-   probador probador0(/*AUTOINST*/
-		      // Outputs
-		      .data_in		(data_in[11:0]),
-		      .data_low		(data_low[11:0]),
-		      .idx		(idx[2:0]),
-		      .state		(state[3:0]),
-		      .reset		(reset),
-		      .req		(req),
-		      .idle		(idle),
-		      .clk		(clk),
-		      // Inputs
-		      .cuenta		(cuenta[4:0]),
-		      .cuenta_est	(cuenta_est[4:0]));
+   tester tester0(/*AUTOINST*/
+		  // Outputs
+		  .data_in		(data_in[11:0]),
+		  .data_low		(data_low[11:0]),
+		  .idx			(idx[2:0]),
+		  .state		(state[3:0]),
+		  .req			(req),
+		  .idle			(idle),
+		  .clk			(clk),
+		  // Inputs
+		  .counts		(counts[4:0]),
+		  .counts_str		(counts_str[4:0]));
    
 endmodule // BancoPruebas
