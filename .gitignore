@@ -4,3 +4,4 @@
 *.o
 *.vcd
 *.out
+*_str.v
