@@ -75,9 +75,9 @@ module fifo(
 
          if(push && pop && memory_state != 0) begin
             data_w <= data_in;
-	         addr_w <= addr_w + 1;
-	         addr_r <= addr_r + 1;
-	         data_out <= data_r;
+	    addr_w <= addr_w + 1;
+	    addr_r <= addr_r + 1;
+	    data_out <= data_r;
             memory_state <= memory_state;
          end
 
