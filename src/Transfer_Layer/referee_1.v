@@ -31,7 +31,7 @@ module referee_1 (
             push_toggle <= 0;
 
         end
-        else begin
+        else if(state == 'b1000 || state == 'b0100) begin
             if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
                 push_0 <= 0;
                 push_1 <= 0;

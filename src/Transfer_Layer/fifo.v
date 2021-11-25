@@ -83,7 +83,7 @@ module fifo(
 
 
 
-          if(push) begin
+          if(push && ~pop) begin
              data_w <= data_in;
 	     addr_w <= addr_w + 1;
              memory_state <= memory_state + 1; // Possible-bug: Short-circuit with itself pop logic
@@ -91,7 +91,7 @@ module fifo(
           /*  pop logic: receive pop signal from respective Referee
            *  how address is updated, its ask for the data in that address and updates the read pointer
            */
-          else if(pop) begin
+          if(pop && ~push) begin
 	     addr_r <= addr_r + 1;
 	     data_out <= data_r;
              memory_state <= memory_state - 1; // Possible-bug: Short-circuit with itself push logic
