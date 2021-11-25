@@ -315,10 +315,12 @@ module probador(
       popOutP2 <= 1;
       popOutP3 <= 1;
       @(posedge clk);
+
       popOutP0 <= 0;
       popOutP1 <= 0;
       popOutP2 <= 0;
       popOutP3 <= 0;
+
       @(posedge clk);
       @(posedge clk);
       @(posedge clk);
