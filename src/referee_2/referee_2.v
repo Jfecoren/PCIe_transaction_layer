@@ -11,27 +11,27 @@ module referee_2 #(
     output reg [3:0] push_signal,
     output reg pop_signal,
     output reg [LINE_SIZE-1:0] data_out,
-    input [3:0] almost_full_signal,
-    input almost_empty_signal,
-    input clk, reset,
+    input [3:0] almost_full_signal, state,
+    input almost_empty_signal, empty_f_signal,
+    input clk,
     input [LINE_SIZE-1:0] data_in
 );
     reg push_toggle, pop_toggle;
 
     always @(posedge clk) begin
-        if(~reset) begin
+        if(state == 4'b0001) begin                                      //RESET state
             push_signal <= 0;
             pop_signal <= 0;
             push_toggle <= 0;
             pop_toggle <= 0;
             data_out <= 0;
         end
-        else begin
-            if(|almost_full_signal || almost_empty_signal) begin        // If at least one receptor is full OR emissor is empty, do not pop
+        else if(state == 4'b1000) begin                                 // ACTIVE state
+            if(|almost_full_signal || empty_f_signal) begin        // If at least one receptor is full OR emissor is empty, do not pop
                 pop_signal <= 0;
                 pop_toggle <= 0;
             end
-            else if(~almost_empty_signal) begin                         // After previous condition, if emmissor is not empty, do pop (toggle pop)
+            else if(~empty_f_signal) begin                         // After previous condition, if emmissor is not empty, do pop (toggle pop)
                 if(~pop_toggle) begin
                     pop_toggle <= 1;
                     pop_signal <= 1;
@@ -54,7 +54,13 @@ module referee_2 #(
             else begin
                 push_signal <= 0;
             end
-        end /*else (reset)*/
+        end
+        else begin                  // IDLE state
+            push_signal <= 0;
+            pop_signal <= 0;
+            push_toggle <= 0;
+            pop_toggle <= 0;
+        end
     end /*posedge clk*/
     
 endmodule

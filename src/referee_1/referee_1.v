@@ -13,7 +13,9 @@ module referee_1 #(
     output reg [LINE_SIZE-1:0] data_out,
     input [3:0] almost_full_signal,
     input [3:0] almost_empty_signal,
-    input clk, reset,
+    input [3:0] empty_f_signal,
+    input clk,
+    input [3:0] state,
     input [LINE_SIZE-1:0] data_in
 );
     /*
@@ -27,7 +29,7 @@ module referee_1 #(
     reg [3:0] counter_flag;
 
     always @(posedge clk) begin
-        if(~reset) begin
+        if(state == 4'b0001) begin          // RESET state
             push_signal <= 0;
             pop_signal <= 0;
             push_toggle <= 0;
@@ -37,19 +39,17 @@ module referee_1 #(
             counter_flag <= 0;
             counter <= 0;
         end
-        else begin
-            if(|almost_full_signal || almost_empty_signal) begin        // If at least one receptor is full OR emissor is empty, do not pop
+        else if(state == 4'b1000) begin                                 //ACTIVE state
+            if(|almost_full_signal || empty_f_signal) begin        // If at least one receptor is full OR emissor is empty, do not pop
                 pop_signal <= 0;
                 pop_toggle <= 0;
             end
             else if(~|almost_empty_signal) begin                         // After previous condition, if emmissor is not empty, do pop (toggle pop)
                 
-                    
-
                 if(~pop_toggle) begin
                     pop_toggle <= 1;
 
-                    if(~almost_empty_signal[3] && ~counter_flag[3]) begin
+                    if(~empty_f_signal[3] && ~counter_flag[3]) begin
                         pop_signal[3] <= 1;
                         if(counter == 3) begin
                             counter_flag[3] <= 1;
@@ -59,7 +59,7 @@ module referee_1 #(
                             counter++;
 
                     end
-                    else if(~almost_empty_signal[2] && ~counter_flag[2]) begin
+                    else if(~empty_f_signal[2] && ~counter_flag[2]) begin
                         pop_signal[2] <= 1;
                         if(counter == 2) begin
                             counter_flag[2] <= 1;
@@ -69,7 +69,7 @@ module referee_1 #(
                             counter++;
                         
                     end
-                    else if(~almost_empty_signal[1] && ~counter_flag[1]) begin
+                    else if(~empty_f_signal[1] && ~counter_flag[1]) begin
                         pop_signal[1] <= 1;
                         if(counter == 1) begin
                             counter_flag[1] <= 1;
@@ -79,7 +79,7 @@ module referee_1 #(
                             counter++;
                         
                     end
-                    else if(~almost_empty_signal[0] && ~counter_flag[0]) begin
+                    else if(~empty_f_signal[0] && ~counter_flag[0]) begin
                         pop_signal[0] <= 1;
                         if(counter == 0) begin
                             counter_flag <= 0;
@@ -108,7 +108,13 @@ module referee_1 #(
                 push_signal <= 0;
             end
             
-        end /*else (reset)*/
+        end 
+        else begin              // IDLE/INIT state
+            pop_signal <= 0;
+            push_signal <= 0;
+            pop_toggle <= 0;
+            push_toggle <= 0;
+        end
     end /*posedge clk*/
     
 endmodule

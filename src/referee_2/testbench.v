@@ -12,8 +12,9 @@ module testbench;
     wire [3:0] push_signal, push_signal_str;
     wire pop_signal, pop_signal_str;
     wire [3:0] almost_full_signal;
-    wire almost_empty_signal;
-    wire clk, reset;
+    wire almost_empty_signal, empty_f_signal;
+    wire clk;
+	wire [3:0] state;
     wire [LINE_SIZE-1:0] data_out, data_out_str, data_in;
 
 
@@ -25,9 +26,10 @@ module testbench;
 			     .data_out		(data_out[LINE_SIZE-1:0]),
 			     // Inputs
 			     .almost_full_signal(almost_full_signal[3:0]),
+			     .state		(state[3:0]),
 			     .almost_empty_signal(almost_empty_signal),
+			     .empty_f_signal	(empty_f_signal),
 			     .clk		(clk),
-			     .reset		(reset),
 			     .data_in		(data_in[LINE_SIZE-1:0]));
 
     referee_2_str referee_2_strl(/*AUTOINST*/
@@ -40,14 +42,16 @@ module testbench;
 				 .almost_full_signal	(almost_full_signal[3:0]),
 				 .clk			(clk),
 				 .data_in		(data_in[11:0]),
-				 .reset			(reset));
+				 .empty_f_signal	(empty_f_signal),
+				 .state			(state[3:0]));
 
     tester referee_tester(/*AUTOINST*/
 			  // Outputs
 			  .almost_full_signal	(almost_full_signal[3:0]),
+			  .state		(state[3:0]),
 			  .almost_empty_signal	(almost_empty_signal),
+			  .empty_f_signal	(empty_f_signal),
 			  .clk			(clk),
-			  .reset		(reset),
 			  .data_in		(data_in[LINE_SIZE-1:0]),
 			  // Inputs
 			  .push_signal		(push_signal[3:0]),

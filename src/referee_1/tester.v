@@ -4,19 +4,19 @@ module tester #(
     input [3:0] push_signal,
     input [3:0] pop_signal,
     input [LINE_SIZE-1:0] data_out,
-    output reg [3:0] almost_full_signal,
-    output reg [3:0] almost_empty_signal,
-    output reg clk, reset,
+    output reg [3:0] almost_full_signal, almost_empty_signal, 
+    output reg [3:0] empty_f_signal, state,
+    output reg clk,
     output reg [LINE_SIZE-1:0] data_in
 );
 
     initial begin
         $dumpfile("referee_1.vcd");
         $dumpvars;
-        {almost_full_signal, almost_empty_signal, reset, data_in} <= 'b0;
-        
+        {almost_full_signal, almost_empty_signal, data_in, empty_f_signal} <= 'b0;
+        state <= 1;
         @(posedge clk)
-            reset <= 1;
+            state <= 8;
             almost_empty_signal <= 1;
         @(posedge clk)
             almost_empty_signal <= 0;
