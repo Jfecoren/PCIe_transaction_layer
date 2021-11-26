@@ -3,7 +3,7 @@ module referee_2 (
     output reg push_0, push_1, push_2, push_3,
     output reg pop,
     //output reg [11:0] data_out,
-    //input [11:0] data_in, 
+    input [11:0] data_in, // [11:10] class
     input almost_full_0, almost_full_1, almost_full_2, almost_full_3,
     input empty,
     input clk,

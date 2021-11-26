@@ -1,0 +1,91 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Fri Nov 26 15:06:05 2021
+[*]
+[dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
+[dumpfile_mtime] "Fri Nov 26 15:05:35 2021"
+[dumpfile_size] 3044950
+[savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/Transfer_layer_seq_view.gtkw"
+[timestart] 0
+[size] 1842 916
+[pos] -1 -1
+*-16.430824 243600 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[treeopen] testbench.transferLayer.
+[sst_width] 218
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 260
+@28
+testbench.transferLayer.fifoIn.clk
+@200
+-Fifo In
+@28
+testbench.transferLayer.fifoIn.addr_r[2:0]
+testbench.transferLayer.fifoIn.addr_w[2:0]
+@22
+testbench.transferLayer.fifoIn.memory_state[7:0]
+[color] 2
+testbench.transferLayer.fifoIn.data_in[11:0]
+@c00022
+testbench.transferLayer.fifoIn.data_out[11:0]
+@28
+(0)testbench.transferLayer.fifoIn.data_out[11:0]
+(1)testbench.transferLayer.fifoIn.data_out[11:0]
+(2)testbench.transferLayer.fifoIn.data_out[11:0]
+(3)testbench.transferLayer.fifoIn.data_out[11:0]
+(4)testbench.transferLayer.fifoIn.data_out[11:0]
+(5)testbench.transferLayer.fifoIn.data_out[11:0]
+(6)testbench.transferLayer.fifoIn.data_out[11:0]
+(7)testbench.transferLayer.fifoIn.data_out[11:0]
+(8)testbench.transferLayer.fifoIn.data_out[11:0]
+(9)testbench.transferLayer.fifoIn.data_out[11:0]
+(10)testbench.transferLayer.fifoIn.data_out[11:0]
+(11)testbench.transferLayer.fifoIn.data_out[11:0]
+@1401200
+-group_end
+@28
+testbench.transferLayer.fifoIn.pop
+testbench.transferLayer.fifoIn.push
+@200
+-Fifo In P0
+@28
+testbench.transferLayer.fifoInP0.addr_r[2:0]
+testbench.transferLayer.fifoInP0.addr_w[2:0]
+@22
+testbench.transferLayer.fifoInP0.memory_state[7:0]
+[color] 3
+testbench.transferLayer.fifoInP0.data_in[11:0]
+testbench.transferLayer.fifoInP0.data_out[11:0]
+@28
+testbench.transferLayer.fifoInP0.pop
+testbench.transferLayer.fifoInP0.push
+@200
+-Demux
+@22
+testbench.transferLayer.demultiplexor.p0[11:0]
+testbench.transferLayer.demultiplexor.demuxOut[11:0]
+@28
+testbench.transferLayer.demultiplexor.valid0
+@200
+-Mux
+@22
+testbench.transferLayer.multiplexorSalida.dataInput[11:0]
+testbench.transferLayer.multiplexorSalida.out0[11:0]
+@200
+-Fifo Out P0
+@28
+testbench.transferLayer.fifoOutP0.addr_r[2:0]
+testbench.transferLayer.fifoOutP0.addr_w[2:0]
+@22
+testbench.transferLayer.fifoOutP0.memory_state[7:0]
+testbench.transferLayer.fifoOutP0.data_in[11:0]
+testbench.transferLayer.fifoOutP0.data_out[11:0]
+@28
+testbench.transferLayer.fifoOutP0.pop
+testbench.transferLayer.fifoOutP0.push
+testbench.transferLayer.fifoOutP1.push
+testbench.transferLayer.fifoOutP2.push
+testbench.transferLayer.fifoOutP3.push
+[pattern_trace] 1
+[pattern_trace] 0

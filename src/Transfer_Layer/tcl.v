@@ -125,6 +125,7 @@ module tcl(
 		      .pop_1		(pop_P1_A1),
 		      .pop_2		(pop_P2_A1),
 		      .pop_3		(pop_P3_A1),
+			  .data_in  (demuxOut[11:0]),
 		      // Inputs
 		      .almost_full_0	(almost_full_P0_A1),
 		      .almost_full_1	(almost_full_P1_A1),
@@ -143,6 +144,7 @@ module tcl(
 		      .push_2		(push_P2_A2),
 		      .push_3		(push_P3_A2),
 		      .pop		(pop_A2),
+			  .data_in  (dataInFIFO[11:0]),
 		      // Inputs
 		      .almost_full_0	(almost_full_P0_A2),
 		      .almost_full_1	(almost_full_P1_A2),
