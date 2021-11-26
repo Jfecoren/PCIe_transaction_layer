@@ -57,6 +57,8 @@ all:
 	vvp $(OUTPUT0)
 wave:
 	gtkwave $(OUTPUT1)
+gtk:
+	gtkwave Transfer_layer_seq_view.gtkw
 clean:
 	rm -rf $(CLN_FLS)
 

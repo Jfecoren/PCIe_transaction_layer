@@ -5,7 +5,7 @@ module referee_1 (
     output reg push_0, push_1, push_2, push_3,
     output reg pop_0, pop_1, pop_2, pop_3,
     //output reg [11:0] data_out,
-    //input [11:0] data_in, 
+    input [11:0] data_in, // [9:8] dest
     input almost_full_0, almost_full_1, almost_full_2, almost_full_3,
     input empty_0, empty_1, empty_2, empty_3,
     input clk,
@@ -235,19 +235,6 @@ module referee_1 (
                                 pop_2 <= 1;                    
                                 wrr_pop_toggle <= wrr_pop_toggle + 1;
                             end
-                        end
-                        else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
-                            if (pop_2 == 1) begin
-                                pop_0 <= 0;
-                                pop_1 <= 0;
-                                pop_2 <= 0;
-                                pop_3 <= 0;
-                            end
-                            else begin 
-                                pop_1 <= 0;
-                                pop_2 <= 1;
-                                wrr_pop_toggle <= wrr_pop_toggle + 1;
-                            end                   
                         end
                         else if (wrr_pop_toggle == 9) begin
                             if (pop_3 == 1) begin
