@@ -20,7 +20,7 @@ module referee_2 (
             push_3 <= 0;
             pop <= 0;
             cont <= 0;
-            pop_toggle <= 1;
+            pop_toggle <= 0;
         end
         else if(state == 'b1000 || state == 'b0100) begin
 

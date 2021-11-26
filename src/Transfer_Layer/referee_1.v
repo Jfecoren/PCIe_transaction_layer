@@ -14,7 +14,7 @@ module referee_1 (
     //reg [3:0] rr_pop_toggle;
     reg [3:0] wrr_pop_toggle;
     reg [1:0] push_toggle;
-    
+
     always @(posedge clk) begin
         if (state == 'b0001) begin
             push_0  <= 0;
@@ -29,6 +29,7 @@ module referee_1 (
             //data_out <= 0;
             wrr_pop_toggle <= 0;
             push_toggle <= 0;
+
 
         end
         else if(state == 'b1000 || state == 'b0100) begin

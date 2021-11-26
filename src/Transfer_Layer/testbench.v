@@ -3,6 +3,7 @@
 `include "tcl_synth.v"
 `include "probador.v"
 
+
 module testbench();
    wire clk, req, reset, init, popOutP0, popOutP1, popOutP2, popOutP3, pushIn, counterValid, counterValid_synth;
    wire [2:0] Umbral_bajo, Umbral_alto, idx;

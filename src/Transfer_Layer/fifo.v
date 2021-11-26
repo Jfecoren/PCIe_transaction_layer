@@ -58,9 +58,7 @@ module fifo(
        else if(state == 'b0010) begin //estado init
 	  umbral_AF <= umbral_AF_in;
 	  umbral_AE <= umbral_AE_in;
-       end else if(state == 'b0100) begin
-	  data_out <= 0;
-       end else if(state == 'b1000) begin
+       end else if(state == 'b1000 || state == 'b0100) begin
 	  if(/*SUGGESTION*/ memory_state >= umbral_AF)
             almost_full <= 1;
           else if(/*SUGGESTION*/ memory_state <= umbral_AE)
@@ -75,9 +73,9 @@ module fifo(
 
          if(push && pop && memory_state != 0) begin
             data_w <= data_in;
-	    addr_w <= addr_w + 1;
-	    addr_r <= addr_r + 1;
-	    data_out <= data_r;
+            addr_w <= addr_w + 1;
+            addr_r <= addr_r + 1;
+            data_out <= data_r;
             memory_state <= memory_state;
          end
 
@@ -85,7 +83,7 @@ module fifo(
 
           if(push && ~pop) begin
              data_w <= data_in;
-	     addr_w <= addr_w + 1;
+	         addr_w <= addr_w + 1;
              memory_state <= memory_state + 1; // Possible-bug: Short-circuit with itself pop logic
           end
           /*  pop logic: receive pop signal from respective Referee

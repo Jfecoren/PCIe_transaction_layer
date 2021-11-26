@@ -8,6 +8,7 @@
 `include "demultiplex.v"
 `include "multiplexIn.v"
 `include "multiplexOut.v"
+`include "buffer3x.v"
 
 module tcl(
 	   input 	 clk, req, reset, init, popOutP0, popOutP1, popOutP2, popOutP3, pushIn,
@@ -27,6 +28,20 @@ module tcl(
    wire [11:0] 		     dataInFIFO, dataInP0, dataInP1, dataInP2, dataInP3, dataOutP0, dataOutP1, dataOutP2, dataOutP3, demuxOut;
    wire [11:0] 		     dataMidP0, dataMidP1, dataMidP2, dataMidP3, dataInputFIFO, dataOutputP0, dataOutputP1, dataOutputP2, dataOutputP3;
    
+   
+   wire [3:0]			buffer_ref1;
+	wire [3:0] buffer_pushes;
+	assign push_P0_A1 = buffer_pushes[0];
+	assign push_P1_A1 = buffer_pushes[1];
+	assign push_P2_A1 = buffer_pushes[2];
+	assign push_P3_A1 = buffer_pushes[3];
+
+	buffer3x buffer_referee_1(
+				.data_in		(buffer_ref1),
+				.clk			(clk),
+				.data_out		(buffer_pushes)
+
+	);
    // Maquina de Estados
    state_machine maquinaEstados(
 				// Outputs
@@ -102,10 +117,10 @@ module tcl(
    // Arbitros
    referee_1 arbitro1(
 		      // Outputs
-		      .push_0		(push_P0_A1),
-		      .push_1		(push_P1_A1),
-		      .push_2		(push_P2_A1),
-		      .push_3		(push_P3_A1),
+		      .push_0		(buffer_ref1[0]),
+		      .push_1		(buffer_ref1[1]),
+		      .push_2		(buffer_ref1[2]),
+		      .push_3		(buffer_ref1[3]),
 		      .pop_0		(pop_P0_A1),
 		      .pop_1		(pop_P1_A1),
 		      .pop_2		(pop_P2_A1),

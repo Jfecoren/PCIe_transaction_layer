@@ -50,6 +50,7 @@ all:
 	sed -i 's/demultiplex/demultiplex_synth/g' $(TARGET1)
 	sed -i 's/fifo/fifo_synth/g' $(TARGET1)
 	sed -i 's/true_dpram_sclk/true_dpram_sclk_synth/g' $(TARGET1)
+	sed -i 's/buffer3x/buffer3x_synth/g' $(TARGET1)
 	emacs --batch $(TESTBENCH0) -f verilog-batch-auto
 	@echo "Compilando Verilog"
 	$(CC) -o $(OUTPUT0) $(TESTBENCH0)
