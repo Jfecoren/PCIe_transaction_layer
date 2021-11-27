@@ -4,6 +4,7 @@
 module referee_1 (
     output reg push_0, push_1, push_2, push_3,
     output reg pop_0, pop_1, pop_2, pop_3,
+    output reg push_enable,
     //output reg [11:0] data_out,
     //input [11:0] data_in, 
     input almost_full_0, almost_full_1, almost_full_2, almost_full_3,
@@ -25,6 +26,7 @@ module referee_1 (
             pop_1 <= 0;
             pop_2 <= 0;
             pop_3 <= 0;
+            push_enable <= 1;
             //data_out <= 0;
             wrr_pop_toggle <= 0;
             push_toggle <= 0;

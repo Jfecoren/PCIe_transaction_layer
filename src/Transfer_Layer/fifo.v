@@ -40,24 +40,25 @@ module fifo(
     always @(posedge clk) begin
        // Reset logic
        if(state == 'b0001) begin
-	  in_ni <= 0;
-	  we_a <= 1;
-	  we_b <= 0;
-          wr_ptr <= 0;
-          rd_ptr <= 0;
-          memory_state <= 0;          // counter of used lines in memory
-          almost_full <= 0;
-          almost_empty <= 0;
-	  umbral_AF <= 6;
-	  umbral_AE <= 0;
-	  addr_r <= 0;
-	  addr_w <= 0;
-	  data_out <= 0;
+         in_ni <= 0;
+         we_a <= 1;
+         we_b <= 0;
+         wr_ptr <= 0;
+         rd_ptr <= 0;
+         memory_state <= 0;          // counter of used lines in memory
+         almost_full <= 0;
+         almost_empty <= 0;
+         umbral_AF <= 6;
+         umbral_AE <= 0;
+         addr_r <= 0;
+         addr_w <= 0;
+         data_out <= 0;
        end // if (state == 'b0001)
        // fifo logic
        else if(state == 'b0010) begin //estado init
 	  umbral_AF <= umbral_AF_in;
 	  umbral_AE <= umbral_AE_in;
+     almost_empty <= 1;
        end else if(state == 'b1000 || state == 'b0100) begin
 	  if(/*SUGGESTION*/ memory_state >= umbral_AF)
             almost_full <= 1;
