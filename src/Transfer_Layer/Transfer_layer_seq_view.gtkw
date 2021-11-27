@@ -1,30 +1,29 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Sat Nov 27 05:05:58 2021
+[*] Sat Nov 27 19:04:42 2021
 [*]
-[dumpfile] "/home/luis/Documents/Digitales_II/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
-[dumpfile_mtime] "Sat Nov 27 05:05:03 2021"
-[dumpfile_size] 2694250
-[savefile] "/home/luis/Documents/Digitales_II/PCIe_transaction_layer/src/Transfer_Layer/Transfer_layer_seq_view.gtkw"
+[dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
+[dumpfile_mtime] "Sat Nov 27 19:03:13 2021"
+[dumpfile_size] 2846398
+[savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/Transfer_layer_seq_view.gtkw"
 [timestart] 0
-[size] 1848 1376
+[size] 1842 916
 [pos] -1 -1
-*-16.430824 84800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.430824 378000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] testbench.
 [treeopen] testbench.transferLayer.
 [sst_width] 233
-[signals_width] 166
+[signals_width] 201
 [sst_expanded] 1
-[sst_vpaned_height] 424
+[sst_vpaned_height] 367
 @28
 testbench.transferLayer.fifoIn.clk
+@2022
+^1 /home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/state_dict.txt
+testbench.transferLayer.state[3:0]
 @200
 -Fifo In
 @28
-testbench.transferLayer.fifoIn.addr_r[2:0]
-testbench.transferLayer.fifoIn.addr_w[2:0]
-@22
-testbench.transferLayer.fifoIn.memory_state[7:0]
 [color] 2
 testbench.transferLayer.fifoIn.data_in[11:0]
 @c00022
@@ -47,18 +46,10 @@ testbench.transferLayer.fifoIn.data_out[11:0]
 @28
 [color] 2
 testbench.transferLayer.fifoIn.pop
-testbench.transferLayer.arbitro2.empty
-@22
-testbench.transferLayer.arbitro1.state[3:0]
-@28
 testbench.transferLayer.fifoIn.push
 @200
 -Fifo In P0
-@28
-testbench.transferLayer.fifoInP0.addr_r[2:0]
-testbench.transferLayer.fifoInP0.addr_w[2:0]
 @22
-testbench.transferLayer.fifoInP0.memory_state[7:0]
 [color] 3
 testbench.transferLayer.fifoInP0.data_in[11:0]
 testbench.transferLayer.fifoInP0.data_out[11:0]
@@ -66,31 +57,82 @@ testbench.transferLayer.fifoInP0.data_out[11:0]
 testbench.transferLayer.fifoInP0.pop
 testbench.transferLayer.fifoInP0.push
 @200
--Demux
+-Fifo In P1
 @22
-testbench.transferLayer.demultiplexor.p0[11:0]
-testbench.transferLayer.demultiplexor.demuxOut[11:0]
+testbench.transferLayer.fifoInP1.data_in[11:0]
+testbench.transferLayer.fifoInP1.data_out[11:0]
 @28
-testbench.transferLayer.demultiplexor.valid0
+testbench.transferLayer.fifoInP1.pop
+testbench.transferLayer.fifoInP1.push
 @200
--Mux
+-Fifo In P2
 @22
-testbench.transferLayer.multiplexorSalida.dataInput[11:0]
-testbench.transferLayer.multiplexorSalida.out0[11:0]
+testbench.transferLayer.fifoInP2.data_in[11:0]
+testbench.transferLayer.fifoInP2.data_out[11:0]
+@28
+testbench.transferLayer.fifoInP2.pop
+testbench.transferLayer.fifoInP2.push
+@200
+-Fifo In P3
+@22
+testbench.transferLayer.fifoInP3.data_in[11:0]
+testbench.transferLayer.fifoInP3.data_out[11:0]
+@28
+testbench.transferLayer.fifoInP3.pop
+testbench.transferLayer.fifoInP3.push
 @200
 -Fifo Out P0
-@28
-testbench.transferLayer.fifoOutP0.addr_r[2:0]
-testbench.transferLayer.fifoOutP0.addr_w[2:0]
 @22
-testbench.transferLayer.fifoOutP0.memory_state[7:0]
 testbench.transferLayer.fifoOutP0.data_in[11:0]
 testbench.transferLayer.fifoOutP0.data_out[11:0]
 @28
-testbench.transferLayer.fifoOutP0.pop
-testbench.transferLayer.fifoOutP0.push
-testbench.transferLayer.fifoOutP1.push
-testbench.transferLayer.fifoOutP2.push
-testbench.transferLayer.fifoOutP3.push
+testbench.transferLayer.fifoInP0.pop
+testbench.transferLayer.fifoInP0.push
+@200
+-Fifo Out P1
+@22
+testbench.transferLayer.fifoInP1.data_in[11:0]
+testbench.transferLayer.fifoInP1.data_out[11:0]
+@28
+testbench.transferLayer.fifoInP1.pop
+testbench.transferLayer.fifoInP1.push
+@200
+-Fifo Out P2
+@22
+testbench.transferLayer.fifoInP2.data_in[11:0]
+testbench.transferLayer.fifoInP2.data_out[11:0]
+@28
+testbench.transferLayer.fifoInP2.pop
+testbench.transferLayer.fifoInP2.push
+@200
+-Fifo Out P3
+@22
+testbench.transferLayer.fifoInP3.data_in[11:0]
+@23
+testbench.transferLayer.fifoInP3.data_out[11:0]
+@28
+testbench.transferLayer.fifoInP3.pop
+testbench.transferLayer.fifoInP3.push
+@200
+-Counters
+@22
+testbench.transferLayer.bancoContadores.data[4:0]
+@28
+testbench.transferLayer.bancoContadores.idx[2:0]
+@22
+testbench.transferLayer.bancoContadores.in0[4:0]
+testbench.transferLayer.bancoContadores.in1[4:0]
+testbench.transferLayer.bancoContadores.in2[4:0]
+testbench.transferLayer.bancoContadores.in3[4:0]
+@24
+testbench.transferLayer.bancoContadores.in4[4:0]
+@28
+testbench.transferLayer.bancoContadores.req
+testbench.transferLayer.bancoContadores.valid
+@2022
+^1 /home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/state_dict.txt
+testbench.transferLayer.bancoContadores.state[3:0]
+@28
+testbench.transferLayer.bancoContadores.clk
 [pattern_trace] 1
 [pattern_trace] 0

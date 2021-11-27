@@ -10,7 +10,8 @@ YPATH := ../TCL
 VFLAGS := -I ../../include -I ../memory -I ../referee_1 -I ../referee_2 -I ../State_Machine
 CLN_FLS := *.o *.out *.vcd
 
-all:
+all: yosys emacs icarus
+yosys:
 	yosys -s $(YPATH)/tcl.tcl
 	sed -i 's/tcl/tcl_synth/' $(TARGET1)
 	sed -i 's/counterValid/counterValid_synth/g' $(TARGET1)
@@ -52,7 +53,9 @@ all:
 	sed -i 's/true_dpram_sclk/true_dpram_sclk_synth/g' $(TARGET1)
 	sed -i 's/buffer3x/buffer3x_synth/g' $(TARGET1)
 	sed -i 's/buffer2x/buffer2x_synth/g' $(TARGET1)
+emacs:
 	emacs --batch $(TESTBENCH0) -f verilog-batch-auto
+icarus:
 	@echo "Compilando Verilog"
 	$(CC) -o $(OUTPUT0) $(TESTBENCH0)
 	vvp $(OUTPUT0)

@@ -30,23 +30,52 @@ module probador(
          Umbral_alto <= 6;       // Modificamos los umbrales por segunda vez
          Umbral_bajo <= 0;       
          init <= 0;              // Liberamos la señal de init
-      @(posedge clk);   
-      // Se debe provocar almost full en todos los FIFOS de salida (no se puede hacer de forma simultanea) /*SOLAMENTE IMPLEMENTADO PARA P0*/
-      repeat (7) begin
+      @(posedge clk); 
+      /*INICIA SECCION*/ 
+      // Se debe provocar almost full en todos los FIFOS de salida (no se puede hacer de forma simultanea)
+      // Para esto, se utilizan cambiando los bits de destino (se debe considerar la prioridad y observar los contadores)
+      repeat (15) begin
          @(posedge clk);
             pushIn <= 0;
          @(posedge clk);
-            dataInputFIFO <= dataInputFIFO + 12'b000000000001;    // Almost Full P0_Out (Se deben enviar las señales de POP0_out)
+            dataInputFIFO <= dataInputFIFO + 12'b000100000001;    // Almost Full P0_Out (Se deben enviar las señales de POP0_out)
             pushIn <= 1;
       end
          @(posedge clk);
             pushIn <= 0;
-      
+      // Se debe hacer pop a los fifos de salida
+      /*FINALIZA SECCION*/ 
+      repeat (16)
+         @(posedge clk); // Esperamos a que se termine de procesar
+
+
       repeat (7) begin     // Señales de P0 out
          @(posedge clk);
             popOutP0 <= 1;
          @(posedge clk);
             popOutP0 <= 0;
+      end
+      repeat (7) begin     // Señales de P1 out
+         @(posedge clk);
+            popOutP1 <= 1;
+         @(posedge clk);
+            popOutP1 <= 0;
+      end
+      repeat (7) begin     // Señales de P2 out
+         @(posedge clk);
+            popOutP2 <= 1;
+         @(posedge clk);
+            popOutP2 <= 0;
+      end
+      repeat (7) begin     // Señales de P3 out
+         @(posedge clk);
+            popOutP3 <= 1;
+         @(posedge clk);
+            popOutP3 <= 0;
+      end
+      repeat (16) begin     // Esperamos que se actualice todo
+         @(posedge clk);
+      // Verificamos los contadores
       end
       // Una vez todo vacio, enviamos datos al FIFO P0 de entrada
       repeat (7) begin
@@ -90,262 +119,6 @@ module probador(
       pushIn <= 0;
       dataInputFIFO <= 21;
       @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 22;
-      @(posedge clk);
-      pushIn <= 1;
-      @(posedge clk);
-      dataInputFIFO <= 31;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 36;
-      @(posedge clk);
-      pushIn <= 1;
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 24;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 29;
-      @(posedge clk);
-      pushIn <= 1;
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 'b010111111111;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 'b101011111111;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 'b111111111111;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 15;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 15;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 20;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 25;
-      @(posedge clk);
-      @(posedge clk);
-      dataInputFIFO <= 30;
-      pushIn <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 1;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      pushIn <= 0;
-      dataInputFIFO <= 35;
-      @(posedge clk);
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
       popOutP0 <= 0;
       popOutP1 <= 0;
       popOutP2 <= 0;
@@ -411,18 +184,9 @@ module probador(
       popOutP1 <= 0;
       popOutP2 <= 0;
       popOutP3 <= 0;
-
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      @(posedge clk);
-      
+      repeat (10) begin
+         @(posedge clk);
+      end
       
 
       // Termina de almacenar senales

@@ -1,7 +1,7 @@
 `timescale 	1ns	/ 100ps
 `include "tcl.v"
 `include "tcl_synth.v"
-`include "probador.v"
+`include "probador_spec.v"
 
 
 module testbench();
