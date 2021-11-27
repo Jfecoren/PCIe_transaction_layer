@@ -40,24 +40,25 @@ module fifo(
     always @(posedge clk) begin
        // Reset logic
        if(state == 'b0001) begin
-	  in_ni <= 0;
-	  we_a <= 1;
-	  we_b <= 0;
-          wr_ptr <= 0;
-          rd_ptr <= 0;
-          memory_state <= 0;          // counter of used lines in memory
-          almost_full <= 0;
-          almost_empty <= 0;
-	  umbral_AF <= 6;
-	  umbral_AE <= 0;
-	  addr_r <= 0;
-	  addr_w <= 0;
-	  data_out <= 0;
+         in_ni <= 0;
+         we_a <= 1;
+         we_b <= 0;
+         wr_ptr <= 0;
+         rd_ptr <= 0;
+         memory_state <= 0;          // counter of used lines in memory
+         almost_full <= 0;
+         almost_empty <= 0;
+         umbral_AF <= 6;
+         umbral_AE <= 0;
+         addr_r <= 0;
+         addr_w <= 0;
+         data_out <= 0;
        end // if (state == 'b0001)
        // fifo logic
        else if(state == 'b0010) begin //estado init
 	  umbral_AF <= umbral_AF_in;
 	  umbral_AE <= umbral_AE_in;
+     almost_empty <= 1;
        end else if(state == 'b1000 || state == 'b0100) begin
 	  if(/*SUGGESTION*/ memory_state >= umbral_AF)
             almost_full <= 1;
@@ -71,7 +72,7 @@ module fifo(
            *  how address is updated, its saves the data and updates the write pointer
            */
 
-         if(push && pop && memory_state != 0) begin
+         if(push && pop && memory_state != 0 && memory_state != 7) begin
             data_w <= data_in;
             addr_w <= addr_w + 1;
             addr_r <= addr_r + 1;
@@ -81,7 +82,7 @@ module fifo(
 
 
 
-          if(push && ~pop) begin
+          if(push && ~pop && memory_state != 7) begin
              data_w <= data_in;
 	         addr_w <= addr_w + 1;
              memory_state <= memory_state + 1; // Possible-bug: Short-circuit with itself pop logic
@@ -89,7 +90,7 @@ module fifo(
           /*  pop logic: receive pop signal from respective Referee
            *  how address is updated, its ask for the data in that address and updates the read pointer
            */
-          if(pop && ~push) begin
+          if(pop && ~push && memory_state != 0) begin
 	     addr_r <= addr_r + 1;
 	     data_out <= data_r;
              memory_state <= memory_state - 1; // Possible-bug: Short-circuit with itself push logic

@@ -11,6 +11,8 @@ module referee_2 (
 );
     reg [1:0] cont;
     reg pop_toggle; 
+    reg push_toggle;
+    reg push_enable;    
 
     always @(posedge clk) begin
         if (state == 'b0001) begin
@@ -21,107 +23,49 @@ module referee_2 (
             pop <= 0;
             cont <= 0;
             pop_toggle <= 0;
+            push_toggle <= 0;  
+            push_enable <= 0;
+    
         end
         else if(state == 'b1000 || state == 'b0100) begin
-
-            if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
+            if (empty) begin
+                pop <=0;
                 push_0 <= 0;
                 push_1 <= 0;
                 push_2 <= 0;
-                push_3 <= 0;
-
-                // ROUND ROBIN STARTS FOR FIFOS
-
-                if (empty) begin
-                    pop <= 0;
-                end    
-                else begin
-                    if (~pop_toggle) begin
-                        pop <= 0;
-                        pop_toggle <= pop_toggle + 1;                                                
+                push_3 <= 0;                 
+                pop_toggle <= 0;
+                push_enable <= 0;
+            end
+            else if (~(almost_full_0||almost_full_1||almost_full_2||almost_full_3)) begin 
+                if (pop_toggle == 0) begin
+                    pop <= 1;
+                    pop_toggle <= 1;
+                    
+                    if (data_in[11:10] == 'b00) begin
+                        push_0 <= 1;
                     end
-                    else begin
-                        pop <= 1;
-                        pop_toggle <= pop_toggle + 1;
+                    else if (data_in[11:10] == 'b01) begin
+                        push_1 <= 1;
                     end
-                end
-            end            
-            else if (cont == 0) begin
-                push_3 <= 0;
-                push_0 <= 1;
-                cont <= cont + 1;
-                if (empty) begin
-                    pop <= 0;
-                    pop_toggle <= pop_toggle + 1;                    
-                end    
-                else begin
-                    if (~pop_toggle) begin
-                        pop <= 0;
-                        pop_toggle <= pop_toggle + 1;                                                
+                    else if (data_in[11:10] == 'b10) begin
+                        push_2 <= 1;
                     end
-                    else begin
-                        pop <= 1;
-                        pop_toggle <= pop_toggle + 1;
-                    end
+                    else if (data_in[11:10] == 'b11) begin
+                        push_3 <= 1;
+                    end 
                 end
             end
-            else if (cont == 1) begin
+            if(pop_toggle == 1) begin
+                pop <= 0;
+                pop_toggle <= 0; 
+            end
+            if(push_0 | push_1 | push_2 | push_3) begin
                 push_0 <= 0;
-                push_1 <= 1;
-                cont <= cont + 1;                
-                if (empty) begin
-                    pop <= 0;
-                    pop_toggle <= pop_toggle + 1;
-                end    
-                else begin
-                    if (~pop_toggle) begin
-                        pop <= 0;
-                        pop_toggle <= pop_toggle + 1;                        
-                    end
-                    else begin
-                        pop <= 1;
-                        pop_toggle <= pop_toggle + 1;
-                    end
-                end
-            end
-            else if (cont == 2) begin
-                push_1 <=0; 
-                push_2 <=1;
-                cont <= cont + 1;
-                if (empty) begin
-                    pop <= 0;
-                    pop_toggle <= pop_toggle + 1;
-                end    
-                else begin
-                    if (~pop_toggle) begin
-                        pop <= 0;
-                        pop_toggle <= pop_toggle + 1;                        
-                    end
-                    else begin
-                        pop <= 1;
-                        pop_toggle <= pop_toggle + 1;
-                    end
-                end
-            end
-            else if (cont == 3) begin
+                push_1 <= 0;
                 push_2 <= 0;
-                push_3 <= 1;
-                cont <= 0;
-                if (empty) begin
-                    pop <= 0;
-                    pop_toggle <= pop_toggle + 1;                    
-                end    
-                else begin
-                    if (~pop_toggle) begin
-                        pop <= 0;
-                        pop_toggle <= pop_toggle + 1;                        
-                    end
-                    else begin
-                        pop <= 1;
-                        pop_toggle <= pop_toggle + 1;
-                    end
-                end
-            end  
+                push_3 <= 0;                                               
+            end
         end
     end
 endmodule

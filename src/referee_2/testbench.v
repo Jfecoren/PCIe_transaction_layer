@@ -25,13 +25,14 @@ module testbench;
 			     .push_3		(push_3),
 			     .pop		(pop),
 			     // Inputs
+			     .data_in		(data_in[11:0]),
 			     .almost_full_0	(almost_full_0),
 			     .almost_full_1	(almost_full_1),
 			     .almost_full_2	(almost_full_2),
 			     .almost_full_3	(almost_full_3),
 			     .empty		(empty),
 			     .clk		(clk),
-			     .reset		(reset));
+			     .state		(state[3:0]));
 
     referee_2_est referee_2_strl(/*AUTOINST*/
 				 // Outputs
@@ -46,8 +47,9 @@ module testbench;
 				 .almost_full_2		(almost_full_2),
 				 .almost_full_3		(almost_full_3),
 				 .clk			(clk),
+				 .data_in		(data_in[11:0]),
 				 .empty			(empty),
-				 .reset			(reset));
+				 .state			(state[3:0]));
 
 
     tester_referee_2 referee_tester(/*AUTOINST*/

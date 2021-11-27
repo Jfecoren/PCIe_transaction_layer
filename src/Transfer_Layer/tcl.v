@@ -9,6 +9,7 @@
 `include "multiplexIn.v"
 `include "multiplexOut.v"
 `include "buffer3x.v"
+`include "buffer2x.v"
 
 module tcl(
 	   input 	 clk, req, reset, init, popOutP0, popOutP1, popOutP2, popOutP3, pushIn,
@@ -28,7 +29,7 @@ module tcl(
    wire [11:0] 		     dataInFIFO, dataInP0, dataInP1, dataInP2, dataInP3, dataOutP0, dataOutP1, dataOutP2, dataOutP3, demuxOut;
    wire [11:0] 		     dataMidP0, dataMidP1, dataMidP2, dataMidP3, dataInputFIFO, dataOutputP0, dataOutputP1, dataOutputP2, dataOutputP3;
    
-   
+   // Buffer 3x referee 1
    wire [3:0]			buffer_ref1;
 	wire [3:0] buffer_pushes;
 	assign push_P0_A1 = buffer_pushes[0];
@@ -42,6 +43,22 @@ module tcl(
 				.data_out		(buffer_pushes)
 
 	);
+
+	// Buffer 2x referee 2
+   wire [3:0]			buffer_ref2;
+	wire [3:0] buffer_pushes_2;
+	assign push_P0_A2 = buffer_pushes_2[0];
+	assign push_P1_A2 = buffer_pushes_2[1];
+	assign push_P2_A2 = buffer_pushes_2[2];
+	assign push_P3_A2 = buffer_pushes_2[3];
+
+	buffer2x buffer_referee_2(
+				.data_in		(buffer_ref2),
+				.clk			(clk),
+				.data_out		(buffer_pushes_2)
+
+	);
+
    // Maquina de Estados
    state_machine maquinaEstados(
 				// Outputs
@@ -125,7 +142,7 @@ module tcl(
 		      .pop_1		(pop_P1_A1),
 		      .pop_2		(pop_P2_A1),
 		      .pop_3		(pop_P3_A1),
-			  .data_in  (demuxOut[11:0]),
+			  .data_in  (demuxOut[11:0]),			  			  			  
 		      // Inputs
 		      .almost_full_0	(almost_full_P0_A1),
 		      .almost_full_1	(almost_full_P1_A1),
@@ -139,13 +156,13 @@ module tcl(
 		      .state		(state[3:0])); //Hay que cambiar a estado
    referee_2 arbitro2(
 		      // Outputs
-		      .push_0		(push_P0_A2),
-		      .push_1		(push_P1_A2),
-		      .push_2		(push_P2_A2),
-		      .push_3		(push_P3_A2),
+		      .push_0		(buffer_ref2[0]),
+		      .push_1		(buffer_ref2[1]),
+		      .push_2		(buffer_ref2[2]),
+		      .push_3		(buffer_ref2[3]),
 		      .pop		(pop_A2),
 			  .data_in  (dataInFIFO[11:0]),
-		      // Inputs
+		      // Inputs	
 		      .almost_full_0	(almost_full_P0_A2),
 		      .almost_full_1	(almost_full_P1_A2),
 		      .almost_full_2	(almost_full_P2_A2),
