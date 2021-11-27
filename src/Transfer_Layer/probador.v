@@ -58,17 +58,12 @@ module probador(
       pushIn <= 1;
       @(posedge clk);
       dataInputFIFO <= 36;
-      @(posedge clk);
       pushIn <= 0;
       @(posedge clk);
       pushIn <= 1;
-      @(posedge clk);
-      pushIn <= 0;
-      @(posedge clk);
-      pushIn <= 0;
       dataInputFIFO <= 24;
       @(posedge clk);
-      pushIn <= 1;
+      pushIn <= 0;
       @(posedge clk);
       dataInputFIFO <= 29;
       @(posedge clk);
