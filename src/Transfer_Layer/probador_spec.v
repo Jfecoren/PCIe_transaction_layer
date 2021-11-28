@@ -184,6 +184,21 @@ module probador(
       popOutP1 <= 0;
       popOutP2 <= 0;
       popOutP3 <= 0;
+      
+      @(posedge clk);
+      idx <= 0;
+      req <= 1;
+      @(posedge clk);
+      idx <= 1;
+      @(posedge clk);
+      idx <= 2;
+      @(posedge clk);
+      idx <= 3;
+      @(posedge clk);
+      idx <= 4;
+      @(posedge clk);
+      req <= 0;
+      @(posedge clk);
       repeat (10) begin
          @(posedge clk);
       end

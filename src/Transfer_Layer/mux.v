@@ -26,7 +26,9 @@ module mux(
 	      data <= in3;
 	    else
 	      data <= in4;
-	 end // if (req == 1)     
+	 end else
+	   valid <= 0;
+	 // if (req == 1)     
       end else if(state == 4'b1000) begin //estado active
 	 valid <= 0;
       end
