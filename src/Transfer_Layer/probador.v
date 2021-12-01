@@ -372,10 +372,16 @@ module probador(
       popOutP3 <= 0;
 
       @(posedge clk);
+      idx <= 1;
+      req <= 1;
       @(posedge clk);
+      idx <= 2;
       @(posedge clk);
+      idx <= 3;
       @(posedge clk);
+      idx <= 4;
       @(posedge clk);
+      req <= 0;
       @(posedge clk);
       @(posedge clk);
       @(posedge clk);

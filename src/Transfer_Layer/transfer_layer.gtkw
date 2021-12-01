@@ -1,38 +1,79 @@
 [*]
-[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Wed Nov 24 04:23:37 2021
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Wed Dec  1 00:54:30 2021
 [*]
-[dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
-[dumpfile_mtime] "Wed Nov 24 04:19:22 2021"
-[dumpfile_size] 28477
-[savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transfer_layer.gtkw"
+[dumpfile] "/home/jordi/Desktop/Digitales2/Proyecto2/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
+[dumpfile_mtime] "Wed Dec  1 00:49:22 2021"
+[dumpfile_size] 2850684
+[savefile] "/home/jordi/Desktop/Digitales2/Proyecto2/PCIe_transaction_layer/src/Transfer_Layer/transfer_layer.gtkw"
 [timestart] 0
-[size] 1842 916
-[pos] -1 -1
-*-15.831219 210000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] testbench.
-[treeopen] testbench.transferLayer.
-[sst_width] 218
-[signals_width] 218
+[size] 1920 935
+[pos] -919 -335
+*-18.784252 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 196
+[signals_width] 222
 [sst_expanded] 1
-[sst_vpaned_height] 260
+[sst_vpaned_height] 273
+@29
+testbench.clk
+@200
+-Control
+@28
+testbench.reset
+testbench.init
+@200
+-Entradas
 @24
-testbench.transferLayer.fifoIn.addr_w[2:0]
-testbench.transferLayer.fifoIn.addr_r[2:0]
+testbench.Umbral_alto[2:0]
+testbench.Umbral_bajo[2:0]
 @28
-testbench.transferLayer.fifoIn.almost_empty
-testbench.transferLayer.fifoIn.almost_full
-@22
-testbench.transferLayer.fifoIn.data_in[11:0]
-testbench.transferLayer.fifoIn.data_out[11:0]
-testbench.transferLayer.fifoIn.data_r[11:0]
-testbench.transferLayer.fifoIn.data_w[11:0]
-testbench.transferLayer.fifoIn.memory_state[7:0]
+testbench.dataInputFIFO[11:0]
+[color] 3
+testbench.pushIn
+@200
+-Salidas
 @28
-testbench.transferLayer.fifoIn.pop
-testbench.transferLayer.fifoIn.push
-@2024
-^1 /home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/state_dict.txt
-testbench.transferLayer.fifoIn.state[3:0]
+testbench.dataOutputP0[11:0]
+[color] 3
+testbench.popOutP0
+testbench.dataOutputP1[11:0]
+[color] 3
+testbench.popOutP1
+testbench.dataOutputP2[11:0]
+[color] 3
+testbench.popOutP2
+testbench.dataOutputP3[11:0]
+[color] 3
+testbench.popOutP3
+@200
+-Sintetizado
+@28
+testbench.dataOutputP0_synth[11:0]
+[color] 3
+testbench.popOutP0
+testbench.dataOutputP1_synth[11:0]
+[color] 3
+testbench.popOutP1
+testbench.dataOutputP2_synth[11:0]
+[color] 3
+testbench.popOutP2
+testbench.dataOutputP3_synth[11:0]
+[color] 3
+testbench.popOutP3
+@200
+-Contadores
+@28
+[color] 3
+testbench.req
+[color] 3
+testbench.idx[2:0]
+@24
+testbench.counterOut[4:0]
+@28
+testbench.counterValid
+@24
+testbench.counterOut_synth[4:0]
+@28
+testbench.counterValid_synth
 [pattern_trace] 1
 [pattern_trace] 0
