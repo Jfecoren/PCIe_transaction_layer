@@ -8,7 +8,7 @@ module buffer2x(
 
     always @(posedge clk) begin
         buffer0 <= data_in;
-        data_out <= buffer0;
+        data_out <= data_in;
     end
 
 endmodule

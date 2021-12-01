@@ -36,9 +36,9 @@ module probador(
       // Para esto, se utilizan cambiando los bits de destino (se debe considerar la prioridad y observar los contadores)
       repeat (15) begin
          @(posedge clk);
+            dataInputFIFO <= dataInputFIFO + 12'b000100000001;    // Almost Full P0_Out (Se deben enviar las señales de POP0_out)
             pushIn <= 0;
          @(posedge clk);
-            dataInputFIFO <= dataInputFIFO + 12'b000100000001;    // Almost Full P0_Out (Se deben enviar las señales de POP0_out)
             pushIn <= 1;
       end
          @(posedge clk);
@@ -83,6 +83,7 @@ module probador(
             pushIn <= 0;
          @(posedge clk);
             dataInputFIFO <= dataInputFIFO + 12'b00000000011;    // Almost Full P0_Out (Se deben enviar las señales de POP0_out)
+         @(posedge clk);
             pushIn <= 1;
       end
          @(posedge clk);
@@ -118,73 +119,28 @@ module probador(
       @(posedge clk);
       pushIn <= 0;
       dataInputFIFO <= 21;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      @(posedge clk);
-      popOutP0 <= 1;
-      popOutP1 <= 1;
-      popOutP2 <= 1;
-      popOutP3 <= 1;
-      @(posedge clk);
-
-      popOutP0 <= 0;
-      popOutP1 <= 0;
-      popOutP2 <= 0;
-      popOutP3 <= 0;
-      
+      repeat (16) begin
+         
+         @(posedge clk) begin
+            popOutP0 <= 0;
+            popOutP1 <= 0;
+            popOutP2 <= 0;
+            popOutP3 <= 0;
+         end
+       
+         @(posedge clk) begin
+            popOutP0 <= 1;
+            popOutP1 <= 1;
+            popOutP2 <= 1;
+            popOutP3 <= 1;
+         end
+      end
+       @(posedge clk) begin
+            popOutP0 <= 0;
+            popOutP1 <= 0;
+            popOutP2 <= 0;
+            popOutP3 <= 0;
+         end
       @(posedge clk);
       idx <= 0;
       req <= 1;
@@ -211,6 +167,6 @@ module probador(
    
    // Reloj
    initial	clk 	<= 0;			// Valor inicial al reloj, sino siempre ser indeterminado
-   always	#8.4 clk 	<= ~clk;
+   always	#8 clk 	<= ~clk;
 		
 endmodule // probador

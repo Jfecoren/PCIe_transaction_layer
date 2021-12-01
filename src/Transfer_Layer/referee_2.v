@@ -12,7 +12,8 @@ module referee_2 (
     reg [1:0] cont;
     reg pop_toggle; 
     reg push_toggle;
-    reg push_enable;    
+    reg push_enable;
+    reg toggle_en;  
 
     always @(posedge clk) begin
         if (state == 'b0001) begin
@@ -25,11 +26,11 @@ module referee_2 (
             pop_toggle <= 0;
             push_toggle <= 0;  
             push_enable <= 0;
-    
+            toggle_en <= 0;
         end
         else if(state == 'b1000 || state == 'b0100) begin
             if (empty) begin
-                pop <=0;
+                pop <= 0;
                 push_0 <= 0;
                 push_1 <= 0;
                 push_2 <= 0;
@@ -38,10 +39,13 @@ module referee_2 (
                 push_enable <= 0;
             end
             else if (~(almost_full_0||almost_full_1||almost_full_2||almost_full_3)) begin 
-                if (pop_toggle == 0) begin
+                if(~toggle_en)
+                    toggle_en <= 1;
+                else if(toggle_en & pop_toggle)
+                    toggle_en <= 0;
+                if (~pop_toggle & toggle_en) begin
                     pop <= 1;
                     pop_toggle <= 1;
-                    
                     if (data_in[11:10] == 'b00) begin
                         push_0 <= 1;
                     end
@@ -55,10 +59,10 @@ module referee_2 (
                         push_3 <= 1;
                     end 
                 end
-            end
-            if(pop_toggle == 1) begin
+                else begin
                 pop <= 0;
-                pop_toggle <= 0; 
+                pop_toggle <= 0;
+                end
             end
             if(push_0 | push_1 | push_2 | push_3) begin
                 push_0 <= 0;

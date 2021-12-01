@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Sat Nov 27 19:04:42 2021
+[*] Wed Dec  1 06:14:55 2021
 [*]
 [dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
-[dumpfile_mtime] "Sat Nov 27 19:03:13 2021"
-[dumpfile_size] 2846398
+[dumpfile_mtime] "Wed Dec  1 06:13:52 2021"
+[dumpfile_size] 2614725
 [savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/Transfer_layer_seq_view.gtkw"
 [timestart] 0
 [size] 1842 916
 [pos] -1 -1
-*-16.430824 378000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.430824 248000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] testbench.
 [treeopen] testbench.transferLayer.
 [sst_width] 233
@@ -18,12 +18,15 @@
 [sst_vpaned_height] 367
 @28
 testbench.transferLayer.fifoIn.clk
-@2022
+@2023
 ^1 /home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/state_dict.txt
 testbench.transferLayer.state[3:0]
 @200
 -Fifo In
 @28
+[color] 2
+testbench.transferLayer.fifoIn.data_in[11:0]
+@22
 [color] 2
 testbench.transferLayer.fifoIn.data_in[11:0]
 @c00022
@@ -108,7 +111,6 @@ testbench.transferLayer.fifoInP2.push
 -Fifo Out P3
 @22
 testbench.transferLayer.fifoInP3.data_in[11:0]
-@23
 testbench.transferLayer.fifoInP3.data_out[11:0]
 @28
 testbench.transferLayer.fifoInP3.pop

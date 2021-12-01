@@ -12,212 +12,121 @@ module referee_1 (
     input clk,
     input [3:0] state
 );
-    //reg [3:0] rr_pop_toggle;
-    reg [3:0] wrr_pop_toggle;
-    reg [1:0] push_toggle;
+    reg [3:0] counter_pop;
+    reg [3:0] enable_pop;
+    reg pop_toggle;
+    reg push_toggle;
 
     always @(posedge clk) begin
         if (state == 'b0001) begin
-            push_0  <= 0;
+            push_0 <= 0;
             push_1 <= 0;
             push_2 <= 0;
             push_3 <= 0;
 
             pop_0 <= 0;
-
             pop_1 <= 0;
             pop_2 <= 0;
             pop_3 <= 0;
-            //data_out <= 0;
-            wrr_pop_toggle <= 0;
 
+            counter_pop <= 0;
             push_toggle <= 0;
-            push_enable_0 <= 0;
-            push_enable_1 <= 0;
-            push_enable_2 <= 0;
-            push_enable_3 <= 0;           
+            pop_toggle <= 0;
+            enable_pop <= 4'b0001;
+
+            push_enable_0 <= 1;
+            push_enable_1 <= 1;
+            push_enable_2 <= 1;
+            push_enable_3 <= 1;           
 
 
         end
         else if(state == 'b1000 || state == 'b0100) begin
 
             if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
+                // stops everything
                 push_0 <= 0;
                 push_1 <= 0;
                 push_2 <= 0;
                 push_3 <= 0;
-                pop_0 <= 0; 
+                push_toggle <= 0;
+                pop_0 <= 0;
                 pop_1 <= 0;
-                pop_2 <= 0; 
-                pop_3 <= 0;                
-
-                // WEIGHTED ROUND ROBIN STARTS FOR FIFOS
+                pop_2 <= 0;
+                pop_3 <= 0;
+                pop_toggle <= 0;
                                 
             end
-
-            // ROUND ROBIN STARTS FOR FIFOS
-
-            else if (empty_0|empty_1|empty_2|empty_3) begin
-                if(wrr_pop_toggle >= 0 && wrr_pop_toggle < 4)begin
-                    if (empty_0) begin
-                        pop_3 <= 0;
-                        pop_0 <= 0;
-                        wrr_pop_toggle <= 4;
-                    end
-                    else if (pop_0 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
-                    end
-                    else begin
-                        pop_3 <= 0;                        
-                        pop_0 <= 1;                    
-                        wrr_pop_toggle <= wrr_pop_toggle + 1;
-                    end
-                end
-                else if(wrr_pop_toggle >= 4  && wrr_pop_toggle < 7)begin
-                    if (empty_1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        wrr_pop_toggle <= 7;
-                    end
-                    else if (pop_1 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
-                    end
-                    else begin
-                        pop_0 <= 0;                        
-                        pop_1 <= 1;                    
-                        wrr_pop_toggle <= wrr_pop_toggle + 1;
-                    end
-                end
-                else if(wrr_pop_toggle >= 7  && wrr_pop_toggle < 9)begin
-                    if (empty_2) begin
-                        pop_1 <= 0;                            
-                        pop_2 <= 0;
-                        wrr_pop_toggle <= 9;
-                    end
-                    else if (pop_2 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
-                    end
-                    else begin
-                        pop_1 <= 0;                        
-                        pop_2 <= 1;                    
-                        wrr_pop_toggle <= wrr_pop_toggle + 1;
-                    end
-                end
-                else if(wrr_pop_toggle == 9)begin
-                    if (empty_3) begin
-                        pop_2 <= 0;                            
-                        pop_3 <= 0;
-                        wrr_pop_toggle <= 0;
-                    end
-                    else if (pop_3 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
-                    end
-                    else begin
-                        pop_2 <= 0;                        
-                        pop_3 <= 1;                    
-                        wrr_pop_toggle <= 0;
-                    end
-                end
-            end
-            else begin
-                if (wrr_pop_toggle >= 0 && wrr_pop_toggle < 4) begin
-                    if (pop_0 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
-                    end
-                    else begin 
-                        pop_3 <= 0;
+            else if(~(empty_0|empty_1|empty_2|empty_3)) begin
+                if(~pop_toggle) begin
+                    pop_toggle <= 1;
+                    counter_pop++;
+                    if(~empty_0 & enable_pop[0]) begin
                         pop_0 <= 1;
-                        wrr_pop_toggle <= wrr_pop_toggle + 1;
                     end
-                end
-                else if (wrr_pop_toggle >= 4  && wrr_pop_toggle < 7) begin
-                    if (pop_1 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
-
-                    end
-                    else begin 
-                        pop_0 <= 0;
+                    if(~empty_1 & enable_pop[1]) begin
                         pop_1 <= 1;
-                        wrr_pop_toggle <= wrr_pop_toggle + 1;
-                    end                   
-                end
-                else if (wrr_pop_toggle >= 7  && wrr_pop_toggle < 9) begin
-                    if (pop_2 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
                     end
-                    else begin 
-                        pop_1 <= 0;
+                    if(~empty_2 & enable_pop[2]) begin
                         pop_2 <= 1;
-                        wrr_pop_toggle <= wrr_pop_toggle + 1;
-                    end                   
-                end
-                else if (wrr_pop_toggle == 9) begin
-                    if (pop_3 == 1) begin
-                        pop_0 <= 0;
-                        pop_1 <= 0;
-                        pop_2 <= 0;
-                        pop_3 <= 0;
                     end
-                    else begin 
-                        pop_2 <= 0;
+                    if(~empty_3 & enable_pop[3]) begin
                         pop_3 <= 1;
-                        wrr_pop_toggle <= 0;
                     end
+
+                    if((counter_pop == 3 & enable_pop[0]) | empty_0) begin
+                            enable_pop <= 4'b0010;
+                            counter_pop <= 0;
+                    end
+                    else if((counter_pop == 2 & enable_pop[1]) | empty_1) begin
+                            enable_pop <= 4'b0100;
+                            counter_pop <= 0;
+                    end
+                    else if((counter_pop == 1 & enable_pop[2]) | empty_2) begin
+                            enable_pop <= 4'b1000;
+                            counter_pop <= 0;
+                    end
+                    else if((counter_pop == 0 & enable_pop[3]) | empty_3) begin
+                            enable_pop <= 4'b0001;
+                            counter_pop <= 0;
+                    end
+
                 end
-            end
-            if (pop_0|pop_1|pop_2|pop_3) begin
-                if (data_in[9:8] == 'b00) begin
-                    push_0 <= 1;
-                    push_1 <= 0;
-                    push_2 <= 0;
-                    push_3 <= 0;                     
+                else begin
+                    pop_0 <= 0;
+                    pop_1 <= 0;
+                    pop_2 <= 0;
+                    pop_3 <= 0;
+                    pop_toggle <= 0;
                 end
-                else if (data_in[9:8] == 'b01) begin
+                
+                if(~push_toggle & (pop_0 | pop_1 | pop_2 | pop_3)) begin
+                    push_toggle <= 1;
+                    if(data_in[9:8] == 2'b00)
+                        push_0 <= 1;
+                    else if(data_in[9:8] == 2'b01)
+                        push_1 <= 1;
+                    else if(data_in[9:8] == 2'b10)
+                        push_2 <= 1;
+                    else if(data_in[9:8] == 2'b11)
+                        push_3 <= 1;
+                    else begin
+                        push_0 <= 0;
+                        push_1 <= 0;
+                        push_2 <= 0;
+                        push_3 <= 0;
+                    end
+
+                end
+                else begin
                     push_0 <= 0;
-                    push_1 <= 1;
+                    push_1 <= 0;
                     push_2 <= 0;
                     push_3 <= 0;
-                end
-                else if (data_in[9:8] == 'b10) begin
-                    push_0 <= 0;
-                    push_1 <= 0;
-                    push_2 <= 1;
-                    push_3 <= 0;
-                end
-                else if (data_in[9:8] == 'b11) begin
-                    push_0 <= 0;
-                    push_1 <= 0;
-                    push_2 <= 0;
-                    push_3 <= 1;
+                    push_toggle <= 0;
+                    
                 end
             end
-            if (push_0|push_1|push_2|push_3) begin
-                push_0 <= 0;
-                push_1 <= 0;
-                push_2 <= 0;
-                push_3 <= 0;                     
-            end            
-        end
-    end
-endmodule
+        end // end else
+    end // end always posedge
+endmodule //endmodule
