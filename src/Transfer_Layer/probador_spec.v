@@ -119,8 +119,8 @@ module probador(
       @(posedge clk);
       pushIn <= 0;
       dataInputFIFO <= 21;
+      
       repeat (16) begin
-         
          @(posedge clk) begin
             popOutP0 <= 0;
             popOutP1 <= 0;

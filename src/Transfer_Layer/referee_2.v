@@ -14,7 +14,7 @@ module referee_2 (
     reg push_toggle;
     reg push_enable;
     reg toggle_en;  
-
+    reg pop_enable;
     always @(posedge clk) begin
         if (state == 'b0001) begin
             push_0 <= 0;
@@ -27,6 +27,7 @@ module referee_2 (
             push_toggle <= 0;  
             push_enable <= 0;
             toggle_en <= 0;
+            pop_enable <= 0;
         end
         else if(state == 'b1000 || state == 'b0100) begin
             if (empty) begin
@@ -39,13 +40,22 @@ module referee_2 (
                 push_enable <= 0;
             end
             else if (~(almost_full_0||almost_full_1||almost_full_2||almost_full_3)) begin 
-                if(~toggle_en)
-                    toggle_en <= 1;
-                else if(toggle_en & pop_toggle)
-                    toggle_en <= 0;
-                if (~pop_toggle & toggle_en) begin
+                
+                if (~pop_toggle) begin
                     pop <= 1;
                     pop_toggle <= 1;
+                end
+                else begin
+                    pop <= 0;
+                    pop_toggle <= 0;
+                end
+
+
+                if(pop)
+                    push_enable <= 1;
+                else
+                    push_enable <= 0;
+                if(push_enable) begin
                     if (data_in[11:10] == 'b00) begin
                         push_0 <= 1;
                     end
@@ -60,15 +70,11 @@ module referee_2 (
                     end 
                 end
                 else begin
-                pop <= 0;
-                pop_toggle <= 0;
-                end
-            end
-            if(push_0 | push_1 | push_2 | push_3) begin
-                push_0 <= 0;
-                push_1 <= 0;
-                push_2 <= 0;
-                push_3 <= 0;                                               
+                    push_0 <= 0;
+                    push_1 <= 0;
+                    push_2 <= 0;
+                    push_3 <= 0;
+                end     
             end
         end
     end

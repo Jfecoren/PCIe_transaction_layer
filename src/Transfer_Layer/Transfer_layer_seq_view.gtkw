@@ -1,10 +1,10 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Wed Dec  1 06:14:55 2021
+[*] Thu Dec  2 02:39:27 2021
 [*]
 [dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
-[dumpfile_mtime] "Wed Dec  1 06:13:52 2021"
-[dumpfile_size] 2614725
+[dumpfile_mtime] "Thu Dec  2 02:37:54 2021"
+[dumpfile_size] 2589497
 [savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/Transfer_layer_seq_view.gtkw"
 [timestart] 0
 [size] 1842 916
@@ -18,7 +18,7 @@
 [sst_vpaned_height] 367
 @28
 testbench.transferLayer.fifoIn.clk
-@2023
+@2022
 ^1 /home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/state_dict.txt
 testbench.transferLayer.state[3:0]
 @200
@@ -50,7 +50,7 @@ testbench.transferLayer.fifoIn.data_out[11:0]
 [color] 2
 testbench.transferLayer.fifoIn.pop
 testbench.transferLayer.fifoIn.push
-@200
+@201
 -Fifo In P0
 @22
 [color] 3
@@ -119,16 +119,13 @@ testbench.transferLayer.fifoInP3.push
 -Counters
 @22
 testbench.transferLayer.bancoContadores.data[4:0]
+testbench.transferLayer.c0.cuenta[4:0]
+testbench.transferLayer.c1.cuenta[4:0]
+testbench.transferLayer.c2.cuenta[4:0]
+testbench.transferLayer.c3.cuenta[4:0]
+testbench.transferLayer.c4.cuenta[4:0]
 @28
 testbench.transferLayer.bancoContadores.idx[2:0]
-@22
-testbench.transferLayer.bancoContadores.in0[4:0]
-testbench.transferLayer.bancoContadores.in1[4:0]
-testbench.transferLayer.bancoContadores.in2[4:0]
-testbench.transferLayer.bancoContadores.in3[4:0]
-@24
-testbench.transferLayer.bancoContadores.in4[4:0]
-@28
 testbench.transferLayer.bancoContadores.req
 testbench.transferLayer.bancoContadores.valid
 @2022

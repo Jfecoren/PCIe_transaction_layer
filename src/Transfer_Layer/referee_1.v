@@ -42,6 +42,13 @@ module referee_1 (
 
         end
         else if(state == 'b1000 || state == 'b0100) begin
+            
+            if(pop_0 | pop_1 | pop_2 | pop_3) begin
+                pop_0 <= 0;
+                pop_1 <= 0;
+                pop_2 <= 0;
+                pop_3 <= 0;
+            end
 
             if (almost_full_0|almost_full_1|almost_full_2|almost_full_3) begin
                 // stops everything
@@ -93,13 +100,11 @@ module referee_1 (
 
                 end
                 else begin
-                    pop_0 <= 0;
-                    pop_1 <= 0;
-                    pop_2 <= 0;
-                    pop_3 <= 0;
                     pop_toggle <= 0;
                 end
-                
+
+
+
                 if(~push_toggle & (pop_0 | pop_1 | pop_2 | pop_3)) begin
                     push_toggle <= 1;
                     if(data_in[9:8] == 2'b00)
@@ -124,7 +129,6 @@ module referee_1 (
                     push_2 <= 0;
                     push_3 <= 0;
                     push_toggle <= 0;
-                    
                 end
             end
         end // end else
