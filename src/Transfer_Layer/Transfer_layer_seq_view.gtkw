@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Thu Dec  2 02:39:27 2021
+[*] Sun Dec  5 01:51:16 2021
 [*]
 [dumpfile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/transferLayer.vcd"
-[dumpfile_mtime] "Thu Dec  2 02:37:54 2021"
-[dumpfile_size] 2589497
+[dumpfile_mtime] "Thu Dec  2 03:35:56 2021"
+[dumpfile_size] 2590280
 [savefile] "/home/coren/Documents/Verilog/PCIe_transaction_layer/src/Transfer_Layer/Transfer_layer_seq_view.gtkw"
 [timestart] 0
 [size] 1842 916
 [pos] -1 -1
-*-16.430824 248000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.430824 54700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] testbench.
 [treeopen] testbench.transferLayer.
 [sst_width] 233
@@ -50,7 +50,7 @@ testbench.transferLayer.fifoIn.data_out[11:0]
 [color] 2
 testbench.transferLayer.fifoIn.pop
 testbench.transferLayer.fifoIn.push
-@201
+@200
 -Fifo In P0
 @22
 [color] 3
@@ -80,8 +80,9 @@ testbench.transferLayer.fifoInP2.push
 @22
 testbench.transferLayer.fifoInP3.data_in[11:0]
 testbench.transferLayer.fifoInP3.data_out[11:0]
-@28
+@29
 testbench.transferLayer.fifoInP3.pop
+@28
 testbench.transferLayer.fifoInP3.push
 @200
 -Fifo Out P0
@@ -89,32 +90,32 @@ testbench.transferLayer.fifoInP3.push
 testbench.transferLayer.fifoOutP0.data_in[11:0]
 testbench.transferLayer.fifoOutP0.data_out[11:0]
 @28
-testbench.transferLayer.fifoInP0.pop
-testbench.transferLayer.fifoInP0.push
+testbench.transferLayer.fifoOutP0.pop
+testbench.transferLayer.fifoOutP0.push
 @200
 -Fifo Out P1
 @22
-testbench.transferLayer.fifoInP1.data_in[11:0]
-testbench.transferLayer.fifoInP1.data_out[11:0]
+testbench.transferLayer.fifoOutP1.data_in[11:0]
+testbench.transferLayer.fifoOutP1.data_out[11:0]
 @28
-testbench.transferLayer.fifoInP1.pop
-testbench.transferLayer.fifoInP1.push
+testbench.transferLayer.fifoOutP1.pop
+testbench.transferLayer.fifoOutP1.push
 @200
 -Fifo Out P2
 @22
-testbench.transferLayer.fifoInP2.data_in[11:0]
-testbench.transferLayer.fifoInP2.data_out[11:0]
+testbench.transferLayer.fifoOutP2.data_in[11:0]
+testbench.transferLayer.fifoOutP2.data_out[11:0]
 @28
-testbench.transferLayer.fifoInP2.pop
-testbench.transferLayer.fifoInP2.push
+testbench.transferLayer.fifoOutP2.pop
+testbench.transferLayer.fifoOutP2.push
 @200
 -Fifo Out P3
 @22
-testbench.transferLayer.fifoInP3.data_in[11:0]
-testbench.transferLayer.fifoInP3.data_out[11:0]
+testbench.transferLayer.fifoOutP3.data_in[11:0]
+testbench.transferLayer.fifoOutP3.data_out[11:0]
 @28
-testbench.transferLayer.fifoInP3.pop
-testbench.transferLayer.fifoInP3.push
+testbench.transferLayer.fifoOutP3.pop
+testbench.transferLayer.fifoOutP3.push
 @200
 -Counters
 @22
